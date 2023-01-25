@@ -1,11 +1,12 @@
 import React from 'react';
-import NavComponent from '../../components/NavComponent';
 import Footer from '../../components/Footer';
+import AppointmentForm from '../../components/AppointmentForm';
+import '../../App.css'
 
 const Home = () => {
   return (
-    <div>
-        <p>We are in the home page</p>
+    <div id='background_image'>
+        <AppointmentForm />
         <Footer />
     </div>
     
