@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import logo from '../Images/mainLogo.png';
 const Footer = () => {
     return (
-        <footer className=" bg-light pt-5 pb-4 fixed-bottom" >
+        <footer className=" bg-light pt-5 pb-4" >
             <div className="container">
 
                 <div className="row">

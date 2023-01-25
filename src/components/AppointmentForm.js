@@ -8,7 +8,10 @@ import "../App.css";
 
 function AppointmentForm() {
 
+    const referees = [ 'Mark', 'Jude', 'Luke', 'Abbel', 'Justice', 'Mary', 'Augustine', 'Larry', 'Bastian' ]
+
     const [validated, setValidated] = useState(false);
+
 
     const handleSubmit = (event) => {
       const form = event.currentTarget;
@@ -60,6 +63,28 @@ function AppointmentForm() {
                 </InputGroup>
                 </Form.Group>
             </Row>
+
+            <Form.Group as={Col} className="mb-2" controlId="validationCustom02">
+                <Form.Label>Phone Number</Form.Label>
+                <Form.Control
+                    required
+                    type="numeric"
+                    placeholder="+237 334 334 334"
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group as={Col} className="mb-2" controlId="validationCustom02">
+                <Form.Label>Refered by</Form.Label>
+                <Form.Select aria-label="Default select example">
+                    <option>Open this select menu</option>
+                    {
+                        referees.map((name) => <option>{name}</option>)
+                    }
+                </Form.Select>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            
             <Row className="mb-3">
                 <Form.Group as={Col} md="6" controlId="validationCustom03">
                 <Form.Label>City</Form.Label>
@@ -91,12 +116,12 @@ function AppointmentForm() {
                     feedbackType="invalid"
                 />
             </Form.Group>
-            <div className=" d-flex justify-content-center">
-                <Button variant="primary" size="lg">
+            <div className="d-flex justify-content-sm-evenly">
+                <Button variant="primary" size="lg" type='submit'>
                     Pay Now
                 </Button>
-                <Button variant="secondary" size="lg">
-                    Reserve
+                <Button variant="secondary" size="lg" type='submit'>
+                    Pay Over Counter
                 </Button>
             </div>
         </Form>
@@ -105,4 +130,4 @@ function AppointmentForm() {
   )
 }
 
-export default AppointmentForm
+export default AppointmentForm;

@@ -57,9 +57,10 @@
 
 /* This is the styling for the form appointment form */
 #mainform{
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(245, 245, 245);
   border-radius: 1rem;
   padding: 2rem;
+  margin-bottom: 50px;
 }
 
 /* Form Button div */
