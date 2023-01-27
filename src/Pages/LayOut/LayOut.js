@@ -1,12 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
-import logo from '../../Images/mainLogo.png';
+import logo from '../../Images/logo.png';
 import "../../App.css"
 
 
 const LayOut = () => {
     return (
         <>
-          <nav className="navbar navbar-expand-lg bg-light navbar-light sticky-top" id="topnavbar">
+          <nav className="navbar navbar-expand-lg bg-light sticky-top" id="topnavbar">
             <a className="navbar-brand" href="#"><img src={logo} height="70" /></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

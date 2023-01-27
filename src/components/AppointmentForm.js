@@ -12,6 +12,13 @@ function AppointmentForm() {
 
     const [validated, setValidated] = useState(false);
 
+    const [inputs, setInputs] = useState({});
+
+    const handleChange = (event) =>{
+        event.persist();
+        setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+    }
+
 
     const handleSubmit = (event) => {
       const form = event.currentTarget;
@@ -34,6 +41,8 @@ function AppointmentForm() {
                     type="text"
                     placeholder="First name"
                     defaultValue="Mark"
+                    name="first"
+                    onChange={handleChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
@@ -44,6 +53,8 @@ function AppointmentForm() {
                     type="text"
                     placeholder="Last name"
                     defaultValue="Otto"
+                    name="last"
+                    onChange={handleChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
@@ -52,10 +63,11 @@ function AppointmentForm() {
                 <InputGroup hasValidation>
                     <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                     <Form.Control
-                    type="text"
-                    placeholder="Username"
-                    aria-describedby="inputGroupPrepend"
-                    required
+                        type="text"
+                        placeholder="Username"
+                        aria-describedby="inputGroupPrepend"
+                        name="email"
+                        onChange={handleChange}
                     />
                     <Form.Control.Feedback type="invalid">
                         Please choose a username.
@@ -70,6 +82,8 @@ function AppointmentForm() {
                     required
                     type="numeric"
                     placeholder="+237 334 334 334"
+                    name="number"
+                    onChange={handleChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
@@ -108,6 +122,43 @@ function AppointmentForm() {
                 </Form.Control.Feedback>
                 </Form.Group>
             </Row>
+
+            <Row className='mb-3'>
+
+                <Form.Group as={Col} md="4" controlId="validationCustom02">
+                    <Form.Label>Test 1</Form.Label>
+                    <Form.Select aria-label="Default select example" name='test1' onChange={handleChange}>
+                        <option>Open this select menu</option>
+                        {
+                            referees.map((name) => <option>{name}</option>)
+                        }
+                    </Form.Select>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} md="4" controlId="validationCustom02">
+                    <Form.Label>Test 2</Form.Label>
+                    <Form.Select aria-label="Default select example">
+                        <option>Open this select menu</option>
+                        {
+                            referees.map((name) => <option>{name}</option>)
+                        }
+                    </Form.Select>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} md="4" controlId="validationCustom02">
+                    <Form.Label>Test 3</Form.Label>
+                    <Form.Select aria-label="Default select example">
+                        <option>Open this select menu</option>
+                        {
+                            referees.map((name) => <option>{name}</option>)
+                        }
+                    </Form.Select>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+            </Row>
+
             <Form.Group className="mb-3">
                 <Form.Check
                     required
@@ -123,6 +174,12 @@ function AppointmentForm() {
                 <Button variant="secondary" size="lg" type='submit'>
                     Pay Over Counter
                 </Button>
+            </div>
+            <div>
+                <p>Name: {inputs.first}</p>
+                <p>Email: {inputs.email}</p>
+                <p>Phone: {inputs.number}</p>
+                <p>Test1: {inputs.test1}</p>
             </div>
         </Form>
     </div>
