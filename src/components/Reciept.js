@@ -6,7 +6,9 @@ import '../App.css'
 
 function Reciept() {
   return (
-    <div className='container bg-primary justify-content-center' id="receipt">
+    <div className='container justify-content-center' id="receipt">
+        <div id='receipt-frame' className='pt-4'>
+        <span>Print #: MD763764</span>
         <Form>
             <Row>
                 <Row>
@@ -75,6 +77,7 @@ function Reciept() {
                 </Row>
             </Row>
         </Form>
+        </div>
     </div>
   )
 }

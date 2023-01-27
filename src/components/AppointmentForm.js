@@ -31,7 +31,7 @@ function AppointmentForm() {
     };
 
   return (
-    <div className='container p-10 align-self-center' id='mainform'>
+    <div className='container' id='mainform'>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
                 <Form.Group as={Col} md="4" controlId="validationCustom01">

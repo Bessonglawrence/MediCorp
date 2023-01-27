@@ -77,8 +77,8 @@
 #mainform{
   background-color: #f1f4f5;
   border-radius: 1rem;
-  padding: 2rem;
-  margin-bottom: 150px;
+  padding: 3rem;
+  margin-bottom: 100px;
 }
 
 /* Form Button div */
@@ -95,7 +95,7 @@
   padding-top: 30px;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 150vh;
 }
 /* This is the navbar logo image */
 img{
@@ -120,7 +120,17 @@ img{
 /* Receipt */
 #receipt{
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  background-color: #f1f4f5;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  justify-content: center;
+  text-align:  center;
+}
+#receipt-frame{
+  border-style: solid;
+  border-color: #0a0a0a;
+  border-width: 1px;
 }
 
 .App-logo {

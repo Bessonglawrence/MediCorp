@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div id='background_image'>
         <AppointmentForm />
-        {/* <Reciept /> */}
+        <Reciept />
         <Footer />
     </div>
     
