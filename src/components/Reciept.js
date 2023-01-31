@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import '../App.css'
 
-function Reciept() {
+function Reciept({data}) {
   return (
     <div className='container justify-content-center' id="receipt">
         <div id='receipt-frame' className='pt-4'>
@@ -16,7 +16,7 @@ function Reciept() {
                         <p>Name:</p>
                     </Col>
                     <Col>
-                        <p>Orock Lawrence</p>
+                        <p>{`${data.firstName} ${data.lastName}`}</p>
                     </Col>
                 </Row>
                 <Row>
@@ -24,7 +24,7 @@ function Reciept() {
                         <p>Phone Number:</p>
                     </Col>
                     <Col>
-                        <p>+237 674958974</p>
+                        <p>{data.number}</p>
                     </Col>
                 </Row>
                 <Row>
@@ -32,7 +32,7 @@ function Reciept() {
                         <p>Email:</p>
                     </Col>
                     <Col>
-                        <p>lawrence@test.com</p>
+                        <p>{data.email}</p>
                     </Col>
                 </Row>
                 <Row>
@@ -40,7 +40,7 @@ function Reciept() {
                         <p>Town:</p>
                     </Col>
                     <Col>
-                        <p>Buea</p>
+                        <p>{data.town}</p>
                     </Col>
                 </Row>
                 <Row>
@@ -48,7 +48,7 @@ function Reciept() {
                         <p>Address:</p>
                     </Col>
                     <Col>
-                        <p>Soppo Street 4</p>
+                        <p>{data.address}</p>
                     </Col>
                 </Row>
                 <Row>
@@ -78,6 +78,7 @@ function Reciept() {
             </Row>
         </Form>
         </div>
+        <h6 style={{paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22, fontWeight: 'bold'}}> Click on either the <span>Pay Now</span> or <span>Pay Over Counter</span> Button if you are happy with your receipt</h6>
     </div>
   )
 }

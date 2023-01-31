@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import "../App.css";
 
-function AppointmentForm() {
+function AppointmentForm({onFormSubmit}) {
 
     const referees = [ 'Mark', 'Jude', 'Luke', 'Abbel', 'Justice', 'Mary', 'Augustine', 'Larry', 'Bastian' ]
 
@@ -21,13 +21,18 @@ function AppointmentForm() {
 
 
     const handleSubmit = (event) => {
-      const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
+    //   const form = event.currentTarget;
+    //   if (form.checkValidity() === false) {
+    //     // event.preventDefault();
+    //     // event.stopPropagation();
+    //     onFormSubmit(inputs);
+    //   }
   
       setValidated(true);
+
+      event.preventDefault();
+      onFormSubmit(inputs)
+      console.log(inputs)
     };
 
   return (
@@ -41,7 +46,7 @@ function AppointmentForm() {
                     type="text"
                     placeholder="First name"
                     defaultValue="Mark"
-                    name="first"
+                    name="firstName"
                     onChange={handleChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -53,7 +58,7 @@ function AppointmentForm() {
                     type="text"
                     placeholder="Last name"
                     defaultValue="Otto"
-                    name="last"
+                    name="lastName"
                     onChange={handleChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -102,16 +107,16 @@ function AppointmentForm() {
             <Row className="mb-3">
                 <Form.Group as={Col} md="6" controlId="validationCustom03">
                 <Form.Label>City</Form.Label>
-                <Form.Control type="text" placeholder="City" required />
+                <Form.Control type="text" name='town' placeholder="Town" required />
                 <Form.Control.Feedback type="invalid">
-                    Please provide a valid city.
+                    Please provide a valid Town.
                 </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="3" controlId="validationCustom04">
-                <Form.Label>State</Form.Label>
-                <Form.Control type="text" placeholder="State" required />
+                <Form.Label>Quarter</Form.Label>
+                <Form.Control type="text" placeholder="Quarter" required />
                 <Form.Control.Feedback type="invalid">
-                    Please provide a valid state.
+                    Please provide a valid quarter.
                 </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="3" controlId="validationCustom05">
@@ -174,12 +179,6 @@ function AppointmentForm() {
                 <Button variant="secondary" size="lg" type='submit'>
                     Pay Over Counter
                 </Button>
-            </div>
-            <div>
-                <p>Name: {inputs.first}</p>
-                <p>Email: {inputs.email}</p>
-                <p>Phone: {inputs.number}</p>
-                <p>Test1: {inputs.test1}</p>
             </div>
         </Form>
     </div>

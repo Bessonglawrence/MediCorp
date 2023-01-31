@@ -79,6 +79,7 @@
   border-radius: 1rem;
   padding: 3rem;
   margin-bottom: 100px;
+  margin-top: 2rem;
 }
 
 /* Form Button div */
@@ -99,7 +100,7 @@
 }
 /* This is the navbar logo image */
 img{
-  height: 90px;
+  height: 80px;
   width:  200px;
   margin-left: 9rem;
 }
@@ -123,13 +124,12 @@ img{
   margin-bottom: 3rem;
   background-color: #f1f4f5;
   padding-top: 3rem;
-  padding-bottom: 3rem;
   justify-content: center;
   text-align:  center;
 }
 #receipt-frame{
   border-style: solid;
-  border-color: #0a0a0a;
+  border-color: #020202;
   border-width: 1px;
 }
 
