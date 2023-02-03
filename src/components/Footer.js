@@ -25,9 +25,8 @@ const Footer = () => {
     }
 
     return (
-        <footer className=" bg-light pt-5 pb-4 mt-50">
+        <footer className=" pt-5 pb-4 mt-50 footer" id='footer'>
             <div className="container">
-
                 <div className="row">
                     <div className="col-12 col-md-6" id="news-letter" style={{width: 600, height: 200}}>
                         <h4 className='mt-2'>Subscribe to our news letter</h4>
@@ -42,6 +41,7 @@ const Footer = () => {
                                                     placeholder="Enter Your Email" 
                                                     name="email"
                                                     onChange={handleChange}
+                                                    style={{backgroundColor: 'lightblue'}}
                                                 />
                                             </Form.Group>
                                         </Col>

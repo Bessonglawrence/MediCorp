@@ -96,7 +96,7 @@
   padding-top: 30px;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 150vh;
+  height: auto;
 }
 /* This is the navbar logo image */
 img{
@@ -115,7 +115,9 @@ img{
 /* This is the footer */
 #footer{
   bottom: 0;
-  background-color: #30aada;
+  background-color: #d0e1ec;
+  margin-top: 2rem;
+  height: 400;
 }
 
 /* Social Icon in footer */

@@ -144,7 +144,8 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Blood Test</Form.Label>
-                    <Form.Select required name='bloodTest' onChange={handleChange}>
+                    <Form.Select aria-label="Default select example" name='bloodTest' onChange={handleChange}>
+                        <option>Open this select menu</option>
                         {
                             BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
@@ -154,7 +155,8 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Bone Test</Form.Label>
-                    <Form.Select required name='boneTest' onChange={handleChange}>
+                    <Form.Select aria-label="Default select example" name='boneTest' onChange={handleChange}>
+                        <option>Open this select menu</option>
                         {
                             BoneTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
@@ -164,7 +166,8 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>General Test</Form.Label>
-                    <Form.Select required name='generalTest' onChange={handleChange}>
+                    <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
+                        <option>Open this select menu</option>
                         {
                             BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
