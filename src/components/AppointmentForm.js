@@ -117,8 +117,8 @@ function AppointmentForm({onFormSubmit}) {
                 <Form.Label>Town</Form.Label>
                 <Form.Control
                     required
-                    type="numeric"
-                    placeholder="+237 334 334 334"
+                    type="text"
+                    placeholder="E.g Buea"
                     name="town"
                     onChange={handleChange}
                 />
@@ -144,8 +144,7 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Blood Test</Form.Label>
-                    <Form.Select aria-label="Default select example" name='bloodTest' onChange={handleChange}>
-                        <option>Open this select menu</option>
+                    <Form.Select required name='bloodTest' onChange={handleChange}>
                         {
                             BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
@@ -155,8 +154,7 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Bone Test</Form.Label>
-                    <Form.Select aria-label="Default select example" name='boneTest' onChange={handleChange}>
-                        <option>Open this select menu</option>
+                    <Form.Select required name='boneTest' onChange={handleChange}>
                         {
                             BoneTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
@@ -166,8 +164,7 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>General Test</Form.Label>
-                    <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
-                        <option>Open this select menu</option>
+                    <Form.Select required name='generalTest' onChange={handleChange}>
                         {
                             BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
@@ -196,10 +193,14 @@ function AppointmentForm({onFormSubmit}) {
                 </Button>
             </div>
             :
-            <div className='d-flex justify-self-center'>
-                <Button variant="primary" size="lg" type='submit'>
-                    Show Receipt
-                </Button>
+            <div className='d-flex justify-self-center' id='receipt-button'>
+                { Object.keys(inputs).length > 0 ?
+                    <Button variant="primary" size="lg" type='submit'>
+                        Show Receipt
+                    </Button>
+                    :
+                    null
+                }
             </div>
             }
             
