@@ -5,12 +5,18 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import "../App.css";
+import { Referees, BloodTest, BoneTest } from '../Data/Data';
 
 function AppointmentForm({onFormSubmit}) {
 
-    const referees = [ 'Mark', 'Jude', 'Luke', 'Abbel', 'Justice', 'Mary', 'Augustine', 'Larry', 'Bastian' ]
-
     const [validated, setValidated] = useState(false);
+
+    const [displayReceipt, setDisplayReceipt] = useState(false);
+
+    const handleReceipt = () =>{
+
+    }
+
 
     const [inputs, setInputs] = useState({});
 
@@ -22,42 +28,43 @@ function AppointmentForm({onFormSubmit}) {
 
     const handleSubmit = (event) => {
     //   const form = event.currentTarget;
-    //   if (form.checkValidity() === false) {
-    //     // event.preventDefault();
-    //     // event.stopPropagation();
-    //     onFormSubmit(inputs);
+    //   if (form.checkValidity() === false && displayReceipt === false) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
     //   }
-  
-      setValidated(true);
 
-      event.preventDefault();
-      onFormSubmit(inputs)
-      console.log(inputs)
+        event.preventDefault();
+        setTimeout(() =>{
+            setDisplayReceipt(true);
+            onFormSubmit(inputs);
+        }, 5000);
+  
+
+        setValidated(true)
+        console.log(inputs.town)
     };
 
   return (
     <div className='container' id='mainform'>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
-                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Group as={Col} md="4" controlId="validationCustomfirstName">
                 <Form.Label>First name</Form.Label>
                 <Form.Control
                     required
                     type="text"
                     placeholder="First name"
-                    defaultValue="Mark"
                     name="firstName"
                     onChange={handleChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustom02">
+                <Form.Group as={Col} md="4" controlId="validationCustomlastName">
                 <Form.Label>Last name</Form.Label>
                 <Form.Control
                     required
                     type="text"
                     placeholder="Last name"
-                    defaultValue="Otto"
                     name="lastName"
                     onChange={handleChange}
                 />
@@ -81,7 +88,7 @@ function AppointmentForm({onFormSubmit}) {
                 </Form.Group>
             </Row>
 
-            <Form.Group as={Col} className="mb-2" controlId="validationCustom02">
+            <Form.Group as={Col} className="mb-2" controlId="validationCustomPhoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                     required
@@ -98,32 +105,37 @@ function AppointmentForm({onFormSubmit}) {
                 <Form.Select aria-label="Default select example">
                     <option>Open this select menu</option>
                     {
-                        referees.map((name) => <option>{name}</option>)
+                        Referees.map((referee) => <option key={referee.id}>{referee.name}</option>)
                     }
                 </Form.Select>
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
             
             <Row className="mb-3">
-                <Form.Group as={Col} md="6" controlId="validationCustom03">
-                <Form.Label>City</Form.Label>
-                <Form.Control type="text" name='town' placeholder="Town" required />
-                <Form.Control.Feedback type="invalid">
-                    Please provide a valid Town.
-                </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="3" controlId="validationCustom04">
+
+            <Form.Group as={Col} className="mb-3" controlId="validationCustomTown">
+                <Form.Label>Town</Form.Label>
+                <Form.Control
+                    required
+                    type="numeric"
+                    placeholder="+237 334 334 334"
+                    name="town"
+                    onChange={handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+
+                <Form.Group as={Col} md="5" controlId="validationCustomQuarter">
                 <Form.Label>Quarter</Form.Label>
-                <Form.Control type="text" placeholder="Quarter" required />
+                <Form.Control 
+                    type="text" 
+                    placeholder="Quarter" 
+                    name="quarter"
+                    required 
+                    onChange={handleChange}
+                />
                 <Form.Control.Feedback type="invalid">
                     Please provide a valid quarter.
-                </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="3" controlId="validationCustom05">
-                <Form.Label>Zip</Form.Label>
-                <Form.Control type="text" placeholder="Zip" required />
-                <Form.Control.Feedback type="invalid">
-                    Please provide a valid zip.
                 </Form.Control.Feedback>
                 </Form.Group>
             </Row>
@@ -131,33 +143,33 @@ function AppointmentForm({onFormSubmit}) {
             <Row className='mb-3'>
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
-                    <Form.Label>Test 1</Form.Label>
-                    <Form.Select aria-label="Default select example" name='test1' onChange={handleChange}>
+                    <Form.Label>Blood Test</Form.Label>
+                    <Form.Select aria-label="Default select example" name='bloodTest' onChange={handleChange}>
                         <option>Open this select menu</option>
                         {
-                            referees.map((name) => <option>{name}</option>)
+                            BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
-                    <Form.Label>Test 2</Form.Label>
-                    <Form.Select aria-label="Default select example">
+                    <Form.Label>Bone Test</Form.Label>
+                    <Form.Select aria-label="Default select example" name='boneTest' onChange={handleChange}>
                         <option>Open this select menu</option>
                         {
-                            referees.map((name) => <option>{name}</option>)
+                            BoneTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
-                    <Form.Label>Test 3</Form.Label>
-                    <Form.Select aria-label="Default select example">
+                    <Form.Label>General Test</Form.Label>
+                    <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
                         <option>Open this select menu</option>
                         {
-                            referees.map((name) => <option>{name}</option>)
+                            BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -172,6 +184,9 @@ function AppointmentForm({onFormSubmit}) {
                     feedbackType="invalid"
                 />
             </Form.Group>
+
+            { displayReceipt
+            ?
             <div className="d-flex justify-content-sm-evenly">
                 <Button variant="primary" size="lg" type='submit'>
                     Pay Now
@@ -180,6 +195,14 @@ function AppointmentForm({onFormSubmit}) {
                     Pay Over Counter
                 </Button>
             </div>
+            :
+            <div className='d-flex justify-self-center'>
+                <Button variant="primary" size="lg" type='submit'>
+                    Show Receipt
+                </Button>
+            </div>
+            }
+            
         </Form>
     </div>
  
