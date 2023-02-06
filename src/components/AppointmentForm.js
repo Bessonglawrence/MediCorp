@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import "../App.css";
-import { Referees, BloodTest, BoneTest } from '../Data/Data';
+import { Referees, BloodTest, BoneTest, GeneralTest } from '../Data/Data';
 
 function AppointmentForm({onFormSubmit}) {
 
@@ -41,7 +41,7 @@ function AppointmentForm({onFormSubmit}) {
   
 
         setValidated(true)
-        console.log(inputs.town)
+        console.log(inputs)
     };
 
   return (
@@ -103,7 +103,7 @@ function AppointmentForm({onFormSubmit}) {
             <Form.Group as={Col} className="mb-2" controlId="validationCustom02">
                 <Form.Label>Refered by</Form.Label>
                 <Form.Select aria-label="Default select example">
-                    <option>Open this select menu</option>
+                    <option>Who were you refered by?</option>
                     {
                         Referees.map((referee) => <option key={referee.id}>{referee.name}</option>)
                     }
@@ -145,9 +145,9 @@ function AppointmentForm({onFormSubmit}) {
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Blood Test</Form.Label>
                     <Form.Select aria-label="Default select example" name='bloodTest' onChange={handleChange}>
-                        <option>Open this select menu</option>
+                        <option>Select Blood Test</option>
                         {
-                            BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
+                            BloodTest.map((test) => <option value={test.id} key={test.id}>{test.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -156,9 +156,9 @@ function AppointmentForm({onFormSubmit}) {
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>Bone Test</Form.Label>
                     <Form.Select aria-label="Default select example" name='boneTest' onChange={handleChange}>
-                        <option>Open this select menu</option>
+                    <option>Select Bone Test</option>
                         {
-                            BoneTest.map((test) => <option key={test.id}>{test.name}</option>)
+                            BoneTest.map((test) => <option value={test.id} key={test.id}>{test.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -167,9 +167,9 @@ function AppointmentForm({onFormSubmit}) {
                 <Form.Group as={Col} md="4" controlId="validationCustom02">
                     <Form.Label>General Test</Form.Label>
                     <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
-                        <option>Open this select menu</option>
+                        <option>Select General Test</option>
                         {
-                            BloodTest.map((test) => <option key={test.id}>{test.name}</option>)
+                            GeneralTest.map((test) => <option value={test.id}  key={test.id}>{test.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>

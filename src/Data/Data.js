@@ -108,22 +108,22 @@ const GeneralTest = [
         price: 2700
     },
     {
-        id:1,
+        id:5,
         name: 'Syphillis Test',
         price: 3200
     },
     {
-        id:1,
+        id:6,
         name: 'Thoxicology Test',
         price: 5100
     },
     {
-        id:1,
+        id:7,
         name: 'Prenancy Test',
         price: 4300
     },    
     {
-        id:1,
+        id:8,
         name: 'Prenatal Test',
         price: 3800
     },
@@ -132,5 +132,6 @@ const GeneralTest = [
 export {
     Referees,
     BloodTest,
-    BoneTest
+    BoneTest,
+    GeneralTest
 }
