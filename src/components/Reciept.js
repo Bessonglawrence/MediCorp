@@ -11,6 +11,7 @@ function Reciept({data}) {
     const [bloodTest, setBloodTest] = useState(null);
     const [boneTest, setBoneTest] = useState(null);
     const [generalTest, setGeneralTest] = useState(null);
+    const [testTotal, setTestTotal] = useState(null);
 
 
     useEffect(() =>{
@@ -23,96 +24,66 @@ function Reciept({data}) {
         if(data.generalTest){
             setGeneralTest(GeneralTest.find(test => test.id == data.generalTest))
         }
+
     },[data])
+
+    useEffect(() =>{
+        if (data.bloodTest || data.boneTest || data.generalTest){
+            setTestTotal(boneTest.price + bloodTest.price + generalTest.price)
+        }
+    },[data])
+
 
   return (
             <div>
                  { Object.keys(data).length > 0 ?
                             <div className='container justify-content-center' id="receipt">
-                            <div id='receipt-frame' className='pt-4'>
+                            <div className='pt-4'>
                                 <div>
-                                    <span style={{fontSize: 18, fontWeight: '600'}}>Print #: MD763764</span>
-                                    <span> Buea, SouthWest, Cameroon</span>
+                                    <span style={{fontSize: 20, fontWeight: '600', marginBottom: 20}}>Print #: MD763764</span>
                                 </div>
-                            <Form>
-                                <Row>
-                                    <Row>
-                                        <Col>
-                                            <p>Name:</p>
-                                        </Col>
-                                        <Col>
-                                            <div className='column'>
-                                                <p>{data.firstName}</p>
-                                                <p>{data.lastName}</p>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <p>Phone Number:</p>
-                                        </Col>
-                                        <Col>
-                                            <p>{data.number}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <p>Email:</p>
-                                        </Col>
-                                        <Col>
-                                            <p>{data.email}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <p>Town:</p>
-                                        </Col>
-                                        <Col>
-                                            <p>{data.town}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <p>Quarter:</p>
-                                        </Col>
-                                        <Col>
-                                            <p>{data.quarter}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <p>{bloodTest ? bloodTest.name : "Not selected"}</p>
-                                        </Col>
-                                        <Col>
-                                            <p>{bloodTest ? bloodTest.price : "-----"}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <p>{boneTest ? boneTest.name : "Not selected"}</p>
-                                        </Col>
-                                        <Col>
-                                            <p>{boneTest ? boneTest.price : "-----"}</p>
-                                        </Col>
-                                    </Row> 
-                                    <Row>
-                                        <Col>
-                                            <p>{generalTest ? generalTest.name : "Not Selected"}</p>
-                                        </Col>
-                                        <Col>
-                                            <p>{generalTest ? generalTest.price : "-----"}</p>
-                                        </Col>
-                                    </Row>
-                                    <Row style={{marginBottom: 20}}>
-                                        <Col>
-                                            <strong>Total</strong>
-                                        </Col>
-                                        <Col>
-                                            <strong>40,000 XAF</strong>
-                                        </Col>
-                                    </Row>
-                                </Row>
-                            </Form>
+                                <table className="table table-striped mt-4">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Costumer Info</th>
+                                    <th scope="col">Test</th>
+                                    <th scope="col">Test Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Name</th>
+                                        <td>{data.firstName} {data.lastName}</td>
+                                        <td>{bloodTest ? bloodTest.name : "Not selected"}</td>
+                                        <td>{bloodTest ? bloodTest.price : "-----"}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Phone Number</th>
+                                        <td>{data.number}</td>
+                                        <td>{boneTest ? boneTest.name : "Not selected"}</td>
+                                        <td>{boneTest ? boneTest.price : "-----"}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Town</th>
+                                        <td>{data.town}</td>
+                                        <td>{generalTest ? generalTest.name : "Not Selected"}</td>
+                                        <td>{generalTest ? generalTest.price : "-----"}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td>{data.email}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Test Total</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td ><strong>{testTotal} XAF</strong></td>
+                                    </tr>
+                                </tbody>
+                                </table>
                             </div>
                             <h6 style={{paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22, fontWeight: 'bold'}}> Click on either the <span>Pay Now</span> or <span>Pay Over Counter</span> Button if you are happy with your receipt</h6>
                         </div>
