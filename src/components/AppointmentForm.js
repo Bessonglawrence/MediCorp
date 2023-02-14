@@ -13,10 +13,7 @@ function AppointmentForm({onFormSubmit}) {
 
     const [displayReceipt, setDisplayReceipt] = useState(false);
 
-    const handleReceipt = () =>{
-
-    }
-
+    const [complete, setComplete] = useState(false);
 
     const [inputs, setInputs] = useState({});
 
@@ -36,53 +33,51 @@ function AppointmentForm({onFormSubmit}) {
         event.preventDefault();
         setTimeout(() =>{
             setDisplayReceipt(true);
-            onFormSubmit(inputs);
+            onFormSubmit({...inputs});
         }, 5000);
   
 
         setValidated(true)
-        console.log(inputs)
+        console.log(inputs.time);
     };
+
+    const handleCompleted = (event) =>{
+        event.preventDefault();
+        setTimeout(() =>{
+            setComplete(true);
+            setInputs({})
+        }, 5000);
+    }
 
   return (
     <div className='container' id='mainform'>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
-                <Form.Group as={Col} md="4" controlId="validationCustomfirstName">
-                <Form.Label>First name</Form.Label>
+                <Form.Group as={Col} md="6" controlId="validationCustomfirstName">
+                <Form.Label>Full Name</Form.Label>
                 <Form.Control
                     required
                     type="text"
-                    placeholder="First name"
-                    name="firstName"
+                    placeholder="Full Name"
+                    name="name"
                     onChange={handleChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomlastName">
-                <Form.Label>Last name</Form.Label>
-                <Form.Control
-                    required
-                    type="text"
-                    placeholder="Last name"
-                    name="lastName"
-                    onChange={handleChange}
-                />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+               
+                <Form.Group as={Col} md="6" controlId="validationCustomUsername">
                 <Form.Label>Username</Form.Label>
                 <InputGroup hasValidation>
                     <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                     <Form.Control
                         type="text"
-                        placeholder="Username"
+                        placeholder="Email"
                         aria-describedby="inputGroupPrepend"
                         name="email"
                         onChange={handleChange}
                     />
                     <Form.Control.Feedback type="invalid">
-                        Please choose a username.
+                        Please choose a Email.
                     </Form.Control.Feedback>
                 </InputGroup>
                 </Form.Group>
@@ -100,7 +95,7 @@ function AppointmentForm({onFormSubmit}) {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group as={Col} className="mb-2" controlId="validationCustom02">
+            <Form.Group as={Col} className="mb-2"  controlId="validationCustom02">
                 <Form.Label>Refered by</Form.Label>
                 <Form.Select aria-label="Default select example">
                     <option>Who were you refered by?</option>
@@ -110,6 +105,35 @@ function AppointmentForm({onFormSubmit}) {
                 </Form.Select>
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
+
+            <Row>
+
+            <Form.Group as={Col} className="mb-2" md="6" controlId="validationCustom02">
+                <Form.Label>Test Date</Form.Label>
+                <Form.Control
+                    required
+                    type="date"
+                    placeholder="Select Date for test"
+                    name="date"
+                    onChange={handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group as={Col} className="mb-2" md="6" controlId="validationCustom02">
+                <Form.Label>Test time</Form.Label>
+                <Form.Control
+                    required
+                    type="time"
+                    placeholder="Select time for test"
+                    name="time"
+                    onChange={handleChange}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+
+            </Row>
+           
             
             <Row className="mb-3">
 
@@ -125,7 +149,7 @@ function AppointmentForm({onFormSubmit}) {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
 
-                <Form.Group as={Col} md="5" controlId="validationCustomQuarter">
+                <Form.Group as={Col} md="6" controlId="validationCustomQuarter">
                 <Form.Label>Quarter</Form.Label>
                 <Form.Control 
                     type="text" 
@@ -188,10 +212,10 @@ function AppointmentForm({onFormSubmit}) {
             { displayReceipt
             ?
             <div className="d-flex justify-content-sm-evenly">
-                <Button variant="primary" size="lg" type='submit'>
+                <Button variant="primary" size="lg" onClick={handleCompleted}>
                     Pay Now
                 </Button>
-                <Button variant="secondary" size="lg" type='submit'>
+                <Button variant="secondary" size="lg" onClick={handleCompleted}>
                     Pay Over Counter
                 </Button>
             </div>
@@ -206,7 +230,6 @@ function AppointmentForm({onFormSubmit}) {
                 }
             </div>
             }
-            
         </Form>
     </div>
  

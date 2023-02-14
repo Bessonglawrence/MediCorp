@@ -4,7 +4,8 @@ import {
   Home, 
   AdminDashBoard,
   Nopage,
-  LayOut
+  LayOut,
+  Completed
 } from './Pages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,12 +15,13 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
+      <Routes >
         <Route path="/" element={<LayOut />}>
           <Route index element={<Home />} />
           <Route path="AdminDashBoard" element={<AdminDashBoard />} />
-          <Route path="*" element={<Nopage />} />
         </Route>
+        <Route path="*" element={<Nopage />} />
+        <Route path='Completed' element={<Completed />} />
       </Routes>
     </BrowserRouter>
   )

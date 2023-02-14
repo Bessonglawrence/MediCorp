@@ -11,7 +11,7 @@ function Reciept({data}) {
     const [bloodTest, setBloodTest] = useState(null);
     const [boneTest, setBoneTest] = useState(null);
     const [generalTest, setGeneralTest] = useState(null);
-    const [testTotal, setTestTotal] = useState(null);
+    const [testTotal, setTestTotal] = useState(0);
 
 
     useEffect(() =>{
@@ -27,11 +27,23 @@ function Reciept({data}) {
 
     },[data])
 
-    useEffect(() =>{
-        if (data.bloodTest || data.boneTest || data.generalTest){
-            setTestTotal(boneTest.price + bloodTest.price + generalTest.price)
+    useEffect(()=>{
+        if(boneTest && generalTest && bloodTest){
+            setTestTotal(boneTest.price + generalTest.price + bloodTest.price)
+        } else if(boneTest && generalTest){
+            setTestTotal(boneTest.price + generalTest.price)
+        } else if(boneTest && bloodTest){
+            setTestTotal(bloodTest.price + boneTest.price)
+        } else if(generalTest && bloodTest){
+            setTestTotal(generalTest.price + bloodTest.price)
+        } else if(boneTest){
+            setTestTotal(boneTest.price)
+        } else if(generalTest){
+            setTestTotal(generalTest.price)
+        } else if(bloodTest){
+            setTestTotal(bloodTest.price)
         }
-    },[data])
+    },[boneTest,generalTest,bloodTest])
 
 
   return (
@@ -54,21 +66,21 @@ function Reciept({data}) {
                                 <tbody>
                                     <tr>
                                         <th scope="row">Name</th>
-                                        <td>{data.firstName} {data.lastName}</td>
+                                        <td>{data.name}</td>
                                         <td>{bloodTest ? bloodTest.name : "Not selected"}</td>
-                                        <td>{bloodTest ? bloodTest.price : "-----"}</td>
+                                        <td>{bloodTest ? bloodTest.price : "-----"} XAF</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Phone Number</th>
                                         <td>{data.number}</td>
                                         <td>{boneTest ? boneTest.name : "Not selected"}</td>
-                                        <td>{boneTest ? boneTest.price : "-----"}</td>
+                                        <td>{boneTest ? boneTest.price : "-----"} XAF</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Town</th>
                                         <td>{data.town}</td>
                                         <td>{generalTest ? generalTest.name : "Not Selected"}</td>
-                                        <td>{generalTest ? generalTest.price : "-----"}</td>
+                                        <td>{generalTest ? generalTest.price : "-----"} XAF</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Email</th>
