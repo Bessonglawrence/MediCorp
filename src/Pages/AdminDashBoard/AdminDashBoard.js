@@ -1,16 +1,27 @@
 import React,{useEffect, useState} from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { FiSettings } from 'react-icons/fi';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { ColorModeContext, useMode } from '../../theme/theme';
 
 import Footer from '../../components/Footer';
+import Topbar from '../../components/Topbar';
 
 const AdminDashBoard = () => {
+
+  const [theme, colorMode] = useMode();
+
   return (
-    <div className='mt-16'>
-      <p> This is the AdminDashBoard page</p>
-      <Footer />
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className='dashboard'>
+          <main>
+            <Topbar />
+            <Footer />
+          </main>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+   
   )
 }
 
