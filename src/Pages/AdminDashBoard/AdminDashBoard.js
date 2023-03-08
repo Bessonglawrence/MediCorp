@@ -14,7 +14,7 @@ const AdminDashBoard = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className='dashboard'>
-          <main>
+          <main className='content'>
             <Topbar />
             <Footer />
           </main>
