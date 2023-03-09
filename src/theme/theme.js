@@ -128,7 +128,7 @@ export const tokens = (mode) => ({
     const colors = tokens(mode);
 
     return{
-        pallette:{
+        palette:{
             mode: mode,
             ...(mode === 'dark'
             ? {
@@ -207,9 +207,7 @@ export const tokens = (mode) => ({
         () =>({
             toggleColorMode : () => 
             setMode((prev) => (prev === 'light' ? 'dark' : 'light'))
-        }),
-        []
-    );
+        }),[]);
 
     const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
 

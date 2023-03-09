@@ -18,8 +18,8 @@ const App = () => {
       <Routes >
         <Route path="/" element={<LayOut />}>
           <Route index element={<Home />} />
-          <Route path="AdminDashBoard" element={<AdminDashBoard />} />
         </Route>
+        <Route path="AdminDashBoard" element={<AdminDashBoard />} />
         <Route path="*" element={<Nopage />} />
         <Route path='Completed' element={<Completed />} />
       </Routes>
