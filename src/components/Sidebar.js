@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import { ProSidebarProvider, Menu, MenuItem   } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
+// import 'react-pro-sidebar/dist/css/styles.css';
 import {Box, IconButton,Typography, useTheme} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { tokens } from '../theme/theme';
@@ -8,15 +8,32 @@ import HomeOutlinedIcon  from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon  from '@mui/icons-material/PeopleOutlined';
 import PersonOutlinedIcon  from '@mui/icons-material/PersonOutlined';
 import ReceiptOutlinedIcon  from '@mui/icons-material/ReceiptOutlined';
-import CalenderTodayOutlinedIcon  from '@mui/icons-material/CalenderTodayOutlined';
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import BarChartOutlinedIcon  from '@mui/icons-material/BarChartOutlined';
 import PieChartOutlineOutlinedIcon  from '@mui/icons-material/PieChartOutlineOutlined';
 import TimelineOutlinedIcon  from '@mui/icons-material/TimelineOutlined';
 import MenuOutlinedIcon  from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon  from '@mui/icons-material/MapOutlined';
-import HelpOutlinedIcon  from '@mui/icons-material/HelpOutlined';
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 
-
+const Item = ({ title, to, icon, selected, setSelected }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  return (
+    <MenuItem
+      active={selected === title}
+      style={{
+        color: colors.grey[100],
+      }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+    >
+      <Typography>{title}</Typography>
+      <Link to={to} />
+    </MenuItem>
+  );
+};
 
 
 const SidebarComponent = () => {
@@ -75,7 +92,7 @@ const SidebarComponent = () => {
           </MenuItem>
 
           {/* USER */}
-          
+
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">

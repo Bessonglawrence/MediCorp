@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Footer from '../../components/Footer';
 import Topbar from '../../components/Topbar';
+import SidebarComponent from '../../components/Sidebar';
 
 const AdminDashBoard = () => {
 
@@ -24,7 +25,8 @@ const AdminDashBoard = () => {
     <div>
       <CssBaseline />
       <Topbar />
-      <h1>We are in the dashboard</h1>
+      <SidebarComponent />
+      {/* <h1>We are in the dashboard</h1> */}
       <Footer />
     </div>
     
