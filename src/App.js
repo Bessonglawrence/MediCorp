@@ -13,6 +13,7 @@ import './App.css';
 import Topbar from './components/Topbar';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { ColorModeContext, useMode } from './theme/theme';
+import Footer from './components/Footer';
 
 const App = () => {
 
@@ -24,11 +25,11 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
             <Routes>
-              <Route path='AdminDashBoard' element={<AdminDashBoard />} />
-              
-              <Route path='/' element={<LayOut /> }>
+                <Route path='AdminDashBoard' element={<AdminDashBoard />} />
                 <Route index element={<Home />} />
-              </Route>
+  
+             
+              
               <Route path="*" element={<Nopage />} />
               <Route path='Completed' element={<Completed />} />
 

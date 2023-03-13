@@ -18,7 +18,6 @@ const Home = () => {
         {/* <LayOut /> */}
         <AppointmentForm onFormSubmit={onFormSubmit}/>
         <Reciept data={data}/>
-        <Footer />
     </div>
     
   )
