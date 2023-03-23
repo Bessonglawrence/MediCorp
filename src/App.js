@@ -1,42 +1,29 @@
 
-import React from 'react';
+import React,{useState} from 'react';
 import {
-  Home, 
-  AdminDashBoard,
-  Nopage,
-  LayOut,
-  Completed
+  DashBoard,
+  Home,
+  LayOut
 } from './Pages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
+import BarPage from './Pages/DashBoardPages/BarPage';
+import SidebarComponent from './components/Sidebar';
 import Topbar from './components/Topbar';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { ColorModeContext, useMode } from './theme/theme';
-import Footer from './components/Footer';
+//import DashBoardRoutes from './routes/DashBoardRoute';
 
 const App = () => {
 
-
-  const [theme, colorMode] = useMode();
-
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-            <Routes>
-                <Route path='AdminDashBoard' element={<AdminDashBoard />} />
-                <Route index element={<Home />} />
-  
-             
-              
-              <Route path="*" element={<Nopage />} />
-              <Route path='Completed' element={<Completed />} />
-
-            </Routes>  
-        </BrowserRouter>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<LayOut />} >
+            <Route path="/" element={<Home /> } />
+            <Route path='/dashboard' element={<DashBoard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
 
   )
 

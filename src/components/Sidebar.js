@@ -53,7 +53,7 @@ const SidebarComponent = () => {
         backgroundColor: "transparent !important"
       },
       "& .pro-inner-item":{
-        padding: "5px 35px 5px 20px !important"
+        padding: "5px 20px 5px 15px !important"
       },
       "& .pro-inner-item:hover":{
         color: "#868dfb !important"
@@ -70,7 +70,7 @@ const SidebarComponent = () => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              margin: "5px 0 15px 0",
               color: colors.grey[100],
             }}
           >
@@ -79,7 +79,7 @@ const SidebarComponent = () => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                ml="10px"
+                ml="20px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
                   ADMINIS
@@ -94,7 +94,7 @@ const SidebarComponent = () => {
           {/* USER */}
 
           {!isCollapsed && (
-              <Box mb="25px">
+              <Box mb="15px">
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <img
                     alt="profile-user"
@@ -120,9 +120,9 @@ const SidebarComponent = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "15%"}>
             <Item
-              title="Dashboard"
+              title="DashBoard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}

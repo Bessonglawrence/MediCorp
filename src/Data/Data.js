@@ -1413,9 +1413,81 @@ const GeneralTest = [
     },
 ]
 
+const Receipts = [
+    {
+      id: 1,
+      client: " John Doe",
+      testTotal: 8500 ,
+      tests:[
+        {
+          id: 1,
+          test: 'Liver Function',
+          price: 4000,
+        },
+        {
+          id: 2,
+          test: 'Bone marrow',
+          price: 2000
+        },
+        {
+          id: 3,
+          test: 'Pregnancy test',
+          price: 2500
+        }
+      ]
+    },
+    {
+      id: 2,
+      client: "Mark Lance",
+      testTotal: 8500 ,
+      tests:[
+        {
+          id: 4,
+          test: 'Liver Function',
+          price: 4000,
+        },
+        {
+          id: 5,
+          test: 'Bone marrow',
+          price: 2000
+        },
+        {
+          id: 6,
+          test: 'Pregnancy test',
+          price: 2500
+        }
+      ]
+    },
+
+    {
+      id: 3,
+      client: " Janice Edwards",
+      testTotal: 8500,
+      tests:[
+        {
+          id: 7,
+          test: 'Liver Function',
+          price: 4000,
+        },
+        {
+          id: 8,
+          test: 'Bone marrow',
+          price: 2000
+        },
+        {
+          id: 9,
+          test: 'Pregnancy test',
+          price: 2500
+        }
+      ]
+    },
+    
+]
+
 export {
     Referees,
     BloodTest,
     BoneTest,
-    GeneralTest
+    GeneralTest,
+    Receipts
 }

@@ -66,7 +66,7 @@ function AppointmentForm({onFormSubmit}) {
                 </Form.Group>
                
                 <Form.Group as={Col} md="6" controlId="validationCustomUsername">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <InputGroup hasValidation>
                     <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                     <Form.Control
@@ -209,18 +209,9 @@ function AppointmentForm({onFormSubmit}) {
                 />
             </Form.Group>
 
-            { displayReceipt
-            ?
-            <div className="d-flex justify-content-sm-evenly">
-                <Button variant="primary" size="lg" onClick={handleCompleted}>
-                    Pay Now
-                </Button>
-                <Button variant="secondary" size="lg" onClick={handleCompleted}>
-                    Pay Over Counter
-                </Button>
-            </div>
-            :
-            <div className='d-flex justify-self-center' id='receipt-button'>
+            { !displayReceipt
+            &&
+            <div className= "d-flex justify-content-center" id='receipt-button' >
                 { Object.keys(inputs).length > 0 ?
                     <Button variant="primary" size="lg" type='submit'>
                         Show Receipt

@@ -1,18 +1,31 @@
 import React,{useEffect, useState} from 'react'
-import  Row  from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
 import '../App.css'
 import { Referees, BloodTest, BoneTest,GeneralTest } from '../Data/Data';
 
 function Reciept({data}) {
 
-
+    const handleCompleted = (event) =>{
+        event.preventDefault();
+        // setTimeout(() =>{
+        //     setComplete(true);
+        //     setInputs({})
+        // }, 5000);
+        alert('Button has been pressed')
+    }
+    
     const [bloodTest, setBloodTest] = useState(null);
     const [boneTest, setBoneTest] = useState(null);
     const [generalTest, setGeneralTest] = useState(null);
     const [testTotal, setTestTotal] = useState(0);
 
+
+    const printID = () =>{
+        const characters = '1234567890ABCDEFGHIJLMNOP';
+        const length = characters.length;
+
+        return characters.charAt(Math.random(Math.floor) * length);
+    }
 
     useEffect(() =>{
         if(data.bloodTest){
@@ -47,12 +60,12 @@ function Reciept({data}) {
 
 
   return (
-            <div>
+            <div className='br-4'>
                  { Object.keys(data).length > 0 ?
                             <div className='container justify-content-center' id="receipt">
                             <div className='pt-4'>
                                 <div>
-                                    <span style={{fontSize: 20, fontWeight: '600', marginBottom: 20}}>Print #: MD763764</span>
+                                    <span style={{fontSize: 20, fontWeight: '600', marginBottom: 20}}>Print ID: MD{printID()}</span>
                                 </div>
                                 <table className="table table-striped mt-4">
                                 <thead>
@@ -97,7 +110,12 @@ function Reciept({data}) {
                                 </tbody>
                                 </table>
                             </div>
-                            <h6 style={{paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22, fontWeight: 'bold'}}> Click on either the <span>Pay Now</span> or <span>Pay Over Counter</span> Button if you are happy with your receipt</h6>
+                            <h6 style={{paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22}}> Click on either the <span>Complete Booking</span> Button if you are happy with your receipt</h6>
+                            <div className="d-flex justify-content-center pb-4">
+                                <Button variant="primary" size="lg" onClick={handleCompleted}>
+                                    Complete Booking
+                                </Button>
+                            </div>
                         </div>
                         :
                         null
