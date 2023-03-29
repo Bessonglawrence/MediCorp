@@ -75,7 +75,7 @@ function Reciept({data}) {
             mode: 'no-cors'
         })
 
-        const json = await response.json();
+        const json = await response.json()
         if(!response.ok){
             setError(json.error)
             alert(error)
