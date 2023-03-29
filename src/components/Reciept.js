@@ -72,8 +72,7 @@ function Reciept({data}) {
             headers: {
                 'Content-Type': 'application/Json'
             },
-            mode: 'cors'
-
+            mode: 'no-cors'
         })
 
         const json = await response.json();
