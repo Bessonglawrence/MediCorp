@@ -70,9 +70,10 @@ function Reciept({data}) {
             method: "POST",
             body: JSON.stringify(invoice),
             headers: {
-                'Content-Type': 'application/Json'
+                'Content-Type': 'application/Json',
+                Authorization: 'Bearer ' + accessToken
             },
-            mode: 'no-cors'
+            
         })
 
         const json = await response.json()
