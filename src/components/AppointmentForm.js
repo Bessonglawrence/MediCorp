@@ -17,16 +17,13 @@ function AppointmentForm({onFormSubmit}) {
 
     const [inputs, setInputs] = useState({});
 
-    const [selectedOptions, setSelectedOptions] = useState();
 
 
     const handleChange = (event) =>{
         event.persist();
         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
     }
-    const handleSelect = (data) =>{
-        setSelectedOptions(data)
-    }
+ 
 
 
     const handleSubmit = (event) => {
