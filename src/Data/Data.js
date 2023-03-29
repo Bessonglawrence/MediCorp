@@ -1370,46 +1370,61 @@ const BoneTest = [
     },
 ]
 
-const GeneralTest = [
+const UltraSound = [
     {
         id:1,
-        name: 'Gastric fluid analysis',
+        name: 'Obstetrics',
         price: 4000
     },
     {
         id:2,
-        name: 'Kidney function analysis',
+        name: 'Pelvis',
         price: 3400
     },
     {
         id:3,
-        name: 'Liver function analysis',
+        name: 'Transvaginal',
         price: 2500
     },
     {
         id:4,
-        name: 'Insulin Clearance',
+        name: 'Upper Abdominal',
         price: 2700
     },
     {
         id:5,
-        name: 'Syphillis Test',
+        name: 'Abdominal and Pelvis',
         price: 3200
     },
     {
         id:6,
-        name: 'Thoxicology Test',
+        name: 'Testicular',
         price: 5100
     },
     {
         id:7,
-        name: 'Prenancy Test',
+        name: 'Prostate',
         price: 4300
     },    
     {
         id:8,
-        name: 'Prenatal Test',
+        name: 'Thyroid / Neck',
         price: 3800
+    },
+    {
+      id:9,
+      name: 'Breast',
+      price: 2800
+    },
+    {
+      id:10,
+      name: 'Eye',
+      price: 4800
+    },
+    {
+      id:11,
+      name: 'Soft tissues / Joint',
+      price: 3800
     },
 ]
 
@@ -1488,6 +1503,6 @@ export {
     Referees,
     BloodTest,
     BoneTest,
-    GeneralTest,
+    UltraSound,
     Receipts
 }

@@ -4,8 +4,9 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import Select from 'react-select';
 import "../App.css";
-import { Referees, BloodTest, BoneTest, GeneralTest } from '../Data/Data';
+import { Referees, BloodTest, BoneTest, UltraSound } from '../Data/Data';
 
 function AppointmentForm({onFormSubmit}) {
 
@@ -17,9 +18,15 @@ function AppointmentForm({onFormSubmit}) {
 
     const [inputs, setInputs] = useState({});
 
+    const [selectedOptions, setSelectedOptions] = useState();
+
+
     const handleChange = (event) =>{
         event.persist();
         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+    }
+    const handleSelect = (data) =>{
+        setSelectedOptions(data)
     }
 
 
@@ -38,7 +45,7 @@ function AppointmentForm({onFormSubmit}) {
   
 
         setValidated(true)
-        console.log(inputs.time);
+        console.log(inputs);
     };
 
     const handleCompleted = (event) =>{
@@ -166,10 +173,10 @@ function AppointmentForm({onFormSubmit}) {
 
             <Row className='mb-3'>
 
-                <Form.Group as={Col} md="4" controlId="validationCustom02">
-                    <Form.Label>Blood Test</Form.Label>
+                <Form.Group as={Col} md="3" controlId="validationCustom02">
+                    <Form.Label>ULTRASOUND</Form.Label>
                     <Form.Select aria-label="Default select example" name='bloodTest' onChange={handleChange}>
-                        <option>Select Blood Test</option>
+                        <option>ULTRASOUND</option>
                         {
                             BloodTest.map((test) => <option value={test.id} key={test.id}>{test.name}</option>)
                         }
@@ -177,10 +184,10 @@ function AppointmentForm({onFormSubmit}) {
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="4" controlId="validationCustom02">
-                    <Form.Label>Bone Test</Form.Label>
+                <Form.Group as={Col} md="3" controlId="validationCustom02">
+                    <Form.Label>X-RAY</Form.Label>
                     <Form.Select aria-label="Default select example" name='boneTest' onChange={handleChange}>
-                    <option>Select Bone Test</option>
+                    <option>X-RAY</option>
                         {
                             BoneTest.map((test) => <option value={test.id} key={test.id}>{test.name}</option>)
                         }
@@ -188,12 +195,23 @@ function AppointmentForm({onFormSubmit}) {
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="4" controlId="validationCustom02">
-                    <Form.Label>General Test</Form.Label>
-                    <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
-                        <option>Select General Test</option>
+                <Form.Group as={Col} md="3" controlId="validationCustom02">
+                    <Form.Label>DOPPLER ULTRA SOUND</Form.Label>
+                    <Form.Select aria-label="Default select example" name='ultraSound' onChange={handleChange}>
+                        <option>DOPPLER ULTRA SOUND</option>
                         {
-                            GeneralTest.map((test) => <option value={test.id}  key={test.id}>{test.name}</option>)
+                            UltraSound.map((test) => <option value={test.id}  key={test.id}>{test.name}</option>)
+                        }
+                    </Form.Select>
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} md="3" controlId="validationCustom02">
+                    <Form.Label>SPECIAL PROCEDURES</Form.Label>
+                    <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
+                        <option>SPECIAL PROCEDURES</option>
+                        {
+                            UltraSound.map((test) => <option value={test.id}  key={test.id}>{test.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -209,17 +227,19 @@ function AppointmentForm({onFormSubmit}) {
                 />
             </Form.Group>
 
-            { !displayReceipt
-            &&
-            <div className= "d-flex justify-content-center" id='receipt-button' >
-                { Object.keys(inputs).length > 0 ?
-                    <Button variant="primary" size="lg" type='submit'>
-                        Show Receipt
-                    </Button>
-                    :
-                    null
-                }
-            </div>
+            { !displayReceipt ?
+        
+                <div className= "d-flex justify-content-center" id='receipt-button' >
+                    { Object.keys(inputs).length > 0 ?
+                        <Button variant="primary" size="lg" type='submit'>
+                            Show Receipt
+                        </Button>
+                        :
+                        null
+                    }
+                </div>
+                :
+                null
             }
         </Form>
     </div>
