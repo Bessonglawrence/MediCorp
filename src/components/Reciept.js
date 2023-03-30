@@ -55,6 +55,8 @@ function Reciept({data}) {
         
     },[boneTest,ultraSound,bloodTest])
 
+    let headers = new Headers();
+
     const handleComplete = async(event) =>{
 
         const name = data.name;
@@ -71,6 +73,7 @@ function Reciept({data}) {
             body: JSON.stringify(invoice),
             headers: {
                 'Content-Type': 'application/Json',
+                'Access-Control-Allow-Origin': '*'
             },
             
         })
