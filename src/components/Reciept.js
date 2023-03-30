@@ -71,7 +71,6 @@ function Reciept({data}) {
             body: JSON.stringify(invoice),
             headers: {
                 'Content-Type': 'application/Json',
-                Authorization: 'Bearer ' + accessToken
             },
             
         })
