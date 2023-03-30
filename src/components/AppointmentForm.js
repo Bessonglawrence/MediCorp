@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import  Spinner  from 'react-bootstrap/Spinner';
 import "../App.css";
 import { Referees, BloodTest, BoneTest, UltraSound } from '../Data/Data';
 
@@ -13,9 +14,9 @@ function AppointmentForm({onFormSubmit}) {
 
     const [displayReceipt, setDisplayReceipt] = useState(false);
 
-    const [complete, setComplete] = useState(false);
-
     const [inputs, setInputs] = useState({});
+
+    const [generating, setGenerating] = useState(false)
 
 
 
@@ -27,30 +28,24 @@ function AppointmentForm({onFormSubmit}) {
 
 
     const handleSubmit = (event) => {
-    //   const form = event.currentTarget;
-    //   if (form.checkValidity() === false && displayReceipt === false) {
-    //     event.preventDefault();
-    //     event.stopPropagation();
-    //   }
+      const form = event.currentTarget;
 
+      if (form.checkValidity() === false) {
         event.preventDefault();
+        event.stopPropagation();
+      } else {
+        event.preventDefault();
+        setDisplayReceipt(true);
         setTimeout(() =>{
-            setDisplayReceipt(true);
+            setGenerating(true)
             onFormSubmit({...inputs});
         }, 5000);
   
-
         setValidated(true)
         console.log(inputs);
-    };
+      }
 
-    const handleCompleted = (event) =>{
-        event.preventDefault();
-        setTimeout(() =>{
-            setComplete(true);
-            setInputs({})
-        }, 5000);
-    }
+    };
 
   return (
     <div className='container' id='mainform'>
@@ -235,7 +230,15 @@ function AppointmentForm({onFormSubmit}) {
                     }
                 </div>
                 :
-                null
+                <div className="d-flex justify-content-center" id='receipt-button' >
+                    { 
+                        !generating && 
+                        <div>
+                            <Spinner animation='grow' variant='primary' style={{marginLeft: 90}}/>
+                            <h4 className='d-flex justify-content-center'>Generating Receipt ...</h4>
+                        </div>
+                    }
+                </div>
             }
         </Form>
     </div>
