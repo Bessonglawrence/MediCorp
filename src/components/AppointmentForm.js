@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import  Spinner  from 'react-bootstrap/Spinner';
+import Select from 'react-select';
 import "../App.css";
 import { Referees, BloodTest, BoneTest, UltraSound } from '../Data/Data';
 
@@ -23,6 +24,10 @@ function AppointmentForm({onFormSubmit}) {
     const handleChange = (event) =>{
         event.persist();
         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+    }
+
+    const selectChange = (name, value) = {
+        setInputs(Object.assign(inputs,{ name:value} ))
     }
  
 
@@ -177,6 +182,7 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="3" controlId="validationCustom02">
                     <Form.Label>X-RAY</Form.Label>
+                    <Select options={BloodTest.map((test) => ({value: test.id, label: test.name}))} isMulti onChange={(e) => console.log(e)}/>
                     <Form.Select aria-label="Default select example" name='boneTest' onChange={handleChange}>
                     <option>X-RAY</option>
                         {
