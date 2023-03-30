@@ -26,8 +26,8 @@ function AppointmentForm({onFormSubmit}) {
         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
     }
 
-    const selectChange = (name, value) = {
-        setInputs(Object.assign(inputs,{ name:value} ))
+    const selectChange = (k, value) => {
+        setInputs(...inputs,{ k: value })
     }
  
 
@@ -171,39 +171,24 @@ function AppointmentForm({onFormSubmit}) {
 
                 <Form.Group as={Col} md="3" controlId="validationCustom02">
                     <Form.Label>ULTRASOUND</Form.Label>
-                    <Form.Select aria-label="Default select example" name='bloodTest' onChange={handleChange}>
-                        <option>ULTRASOUND</option>
-                        {
-                            BloodTest.map((test) => <option value={test.id} key={test.id}>{test.name}</option>)
-                        }
-                    </Form.Select>
+                    <Select options={UltraSound.map((test) => ({value: test.id, label: test.name}))} isMulti onChange={(v) => selectChange('ultraSounds', v)}/>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} md="3" controlId="validationCustom02">
                     <Form.Label>X-RAY</Form.Label>
-                    <Select options={BloodTest.map((test) => ({value: test.id, label: test.name}))} isMulti onChange={(e) => console.log(e)}/>
-                    <Form.Select aria-label="Default select example" name='boneTest' onChange={handleChange}>
-                    <option>X-RAY</option>
-                        {
-                            BoneTest.map((test) => <option value={test.id} key={test.id}>{test.name}</option>)
-                        }
-                    </Form.Select>
+                    <Select options={BoneTest.map((test) => ({value: test.id, label: test.name}))} isMulti onChange={(v) => selectChange('boneTests', v)}/>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col} md="3" controlId="validationCustom02">
                     <Form.Label>DOPPLER ULTRA SOUND</Form.Label>
-                    <Form.Select aria-label="Default select example" name='ultraSound' onChange={handleChange}>
-                        <option>DOPPLER ULTRA SOUND</option>
-                        {
-                            UltraSound.map((test) => <option value={test.id}  key={test.id}>{test.name}</option>)
-                        }
-                    </Form.Select>
+                    <Select options={BloodTest.map((test) => ({value: test.id, label: test.name}))} isMulti onChange={(v) => selectChange('bloodTests', v)}/>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} md="3" controlId="validationCustom02">
+
+                {/* <Form.Group as={Col} md="3" controlId="validationCustom02">
                     <Form.Label>SPECIAL PROCEDURES</Form.Label>
                     <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
                         <option>SPECIAL PROCEDURES</option>
@@ -212,7 +197,7 @@ function AppointmentForm({onFormSubmit}) {
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
+                </Form.Group> */}
             </Row>
 
             <Form.Group className="mb-3">
