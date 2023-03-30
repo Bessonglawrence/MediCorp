@@ -1,17 +1,17 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import{ useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import '../App.css'
-import { Referees, BloodTest, BoneTest,UltraSound } from '../Data/Data';
+import { Referees, BloodTest, BoneTest, UltraSound } from '../Data/Data';
 
 
 
-function Reciept({data}) {
+function Reciept({ data }) {
 
-    const [bloodTest, setBloodTest] = useState(null);
-    const [boneTest, setBoneTest] = useState(null);
-    const [ultraSound, setUltraSound] = useState(null);
+    const [bloodTests, setBloodTests] = useState([]);
+    const [boneTests, setBoneTests] = useState([]);
+    const [ultraSounds, setUltraSounds] = useState([]);
     const [testTotal, setTestTotal] = useState(0);
     const [error, setError] = useState('');
     const [allTests, setAllTest] = useState(null);
@@ -19,42 +19,44 @@ function Reciept({data}) {
 
     const navigate = useNavigate();
 
-    
-    useEffect(() =>{
-        if(data.bloodTest){
-            setBloodTest(BloodTest.find(test => test.id == data.bloodTest))
+
+    useEffect(() => {
+        if (data.bloodTests) {
+
+            setBloodTests(data.bloodTests.map(inputTest => {
+                return BloodTest.find(test => test.id === inputTest.value);
+            }))
+
         }
-        if(data.boneTest){
-            setBoneTest(BoneTest.find(test =>test.id == data.boneTest))
+        if (data.boneTests) {
+
+            setBoneTests(data.boneTests.map(inputTest => {
+                return BoneTest.find(test => test.id === inputTest.value)
+            }))
+
         }
-        if(data.ultraSound){
-            setUltraSound(UltraSound.find(test => test.id == data.ultraSound))
+        if (data.ultraSounds) {
+            setUltraSounds(data.ultraSounds.map(inputTest => {
+                return UltraSound.find(test => test.id === inputTest.value)
+            }))
+
         }
 
-        
-    },[data])
 
-    useEffect(()=>{
-        if(boneTest && ultraSound && bloodTest){
-            setTestTotal(boneTest.price + ultraSound.price + bloodTest.price)
-        } else if(boneTest && ultraSound){
-            setTestTotal(boneTest.price + ultraSound.price)
-        } else if(boneTest && bloodTest){
-            setTestTotal(bloodTest.price + boneTest.price)
-        } else if(ultraSound && bloodTest){
-            setTestTotal(ultraSound.price + bloodTest.price)
-        } else if(boneTest){
-            setTestTotal(boneTest.price)
-        } else if(ultraSound){
-            setTestTotal(ultraSound.price)
-        } else if(bloodTest){
-            setTestTotal(bloodTest.price)
-        }
-        
-    },[boneTest,ultraSound,bloodTest])
+    }, [data])
+
+    useEffect(() => {
+        let computedTotal = 0;
+        bloodTests.map(test => computedTotal += test.price);
+        boneTests.map(test => computedTotal += test.price);
+        ultraSounds.map(test => computedTotal += test.price);
+
+        setTestTotal(computedTotal);
+
+    }, [boneTests, ultraSounds, bloodTests])
 
 
-    const handleComplete = async(event) =>{
+    const handleComplete = async (event) => {
 
         setLoading(true);
 
@@ -62,103 +64,127 @@ function Reciept({data}) {
         const email = data.email;
         const number = data.number;
         const total = testTotal;
-        const tests = allTests;
+        const tests = {bloodTests, ultraSounds, boneTests};
 
         event.preventDefault();
-        const invoice = {name,email,number,total,tests};
-
+        const invoice = { name, email, number, total, tests };
+        console.log({invoice});
+        console.log('JSONIFY', JSON.stringify(invoice));
         const response = await fetch('https://medicorpbackend-u5p7.onrender.com/api/invoice/', {
             method: "POST",
             body: JSON.stringify(invoice),
             headers: {
                 'Content-Type': 'application/Json',
             },
-            
+
         })
 
         const json = await response.json()
-        if(!response.ok){
+        if (!response.ok) {
             setError(json.error)
             alert(error)
             setLoading(false)
         }
-        if(response.ok){
+        if (response.ok) {
             console.log("Invoice has been generated", json)
             setLoading(false)
             navigate('/completed')
         }
     }
-
-  return (
-            <div className='br-4'>
-                 { Object.keys(data).length > 0 ?
-                            <div className='container justify-content-center' id="receipt">
-                            <div className='pt-4'>
-                                <div>
-                                    <span style={{fontSize: 20, fontWeight: '600', marginBottom: 20}}>Print ID: #mdc6574346754</span>
-                                </div>
-                                <table className="table table-striped mt-4">
-                                <thead>
-                                    <tr>
+    // console.log({bloodTests, ultraSounds, boneTests})
+    return (
+        <div className='br-4'>
+            {Object.keys(data).length > 0 ?
+                <div className='container ps-5 pe-5' id="receipt">
+                    <div className='pt-4'>
+                        <div className='text-center'>
+                            <span style={{ fontSize: 20, fontWeight: '600', marginBottom: 20 }}>Print ID: #mdc6574346754</span>
+                        </div>
+                        <table className="table table-striped table-bordered mt-4">
+                            <thead>
+                                <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Costumer Info</th>
-                                    <th scope="col">Test</th>
-                                    <th scope="col">Test Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Name</th>
-                                        <td>{data.name}</td>
-                                        <td>{bloodTest ? bloodTest.name : "Not selected"}</td>
-                                        <td>{bloodTest ? bloodTest.price : "-----"} XAF</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Phone Number</th>
-                                        <td>{data.number}</td>
-                                        <td>{boneTest ? boneTest.name : "Not selected"}</td>
-                                        <td>{boneTest ? boneTest.price : "-----"} XAF</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Town</th>
-                                        <td>{data.town}</td>
-                                        <td>{ultraSound ? ultraSound.name : "Not Selected"}</td>
-                                        <td>{ultraSound ? ultraSound.price : "-----"} XAF</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Email</th>
-                                        <td>{data.email}</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Test Total</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td ><strong>{testTotal} XAF</strong></td>
-                                    </tr>
-                                </tbody>
-                                </table>
-                            </div>
-                            <h6 style={{paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22}}> Click on either the <span>Complete Booking</span> Button if you are happy with your receipt</h6>
-                            <div className="d-flex justify-content-center pb-4">
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Name</th>
+                                    <td>{data.name}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone Number</th>
+                                    <td>{data.number}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Town</th>
+                                    <td>{data.town}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td>{data.email}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                               { !loading 
-                                ?
-                                    <Button variant="primary" size="lg" onClick={handleComplete}>
-                                        Complete Booking
-                                    </Button>
-                                :
-                                <Spinner animation="border" variant="primary" />
-                                }
-
-                            </div>
+                        <div className='text-center'>
+                            <span style={{ fontSize: 20, fontWeight: '600', marginBottom: 20 }}>Tests requested</span>
                         </div>
-                        :
-                        null
-                }
-            </div>
-  )
+
+                        <table className="table table-striped table-bordered mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Test name</th>
+                                    <th scope="col">Test price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bloodTests.map((test, key) => (
+                                    <tr key={key}>
+                                        <td>{test.name}</td>
+                                        <td>{test.price}</td>
+                                    </tr>
+                                ))}
+                                {boneTests.map((test, key) => (
+                                    <tr key={key}>
+                                        <td>{test.name}</td>
+                                        <td>{test.price}</td>
+                                    </tr>
+                                ))}
+                                {ultraSounds.map((test, key) => (
+                                    <tr key={key}>
+                                        <td>{test.name}</td>
+                                        <td>{test.price}</td>
+                                    </tr>
+                                ))}
+                                <tr>
+                                    <th scope="row">Test Total</th>
+                                    <td ><strong>{testTotal} XAF</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <h6 style={{ paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22 }}> Click on either the <span>Complete Booking</span> Button if you are happy with your receipt</h6>
+                    <div className="d-flex justify-content-center pb-4">
+
+                        {!loading
+                            ?
+                            <Button variant="primary" size="lg" onClick={handleComplete}>
+                                Complete Booking
+                            </Button>
+                            :
+                            <Spinner animation="border" variant="primary" />
+                        }
+
+                    </div>
+                </div>
+                :
+                null
+            }
+        </div>
+    )
 }
 
 export default Reciept;

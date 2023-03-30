@@ -144,8 +144,8 @@ img{
   margin-bottom: 7rem;
   background-color: #f1f4f5;
   padding-top: 3rem;
-  justify-content: center;
-  text-align:  center;
+  /* justify-content: center; */
+  /* text-align:  center; */
 }
 #receipt-frame{
   border-style: solid;
