@@ -1,27 +1,25 @@
 import React,{useEffect, useState} from 'react'
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+import{ useNavigate } from 'react-router-dom'
 import '../App.css'
 import { Referees, BloodTest, BoneTest,UltraSound } from '../Data/Data';
 
+
+
 function Reciept({data}) {
+
     const [bloodTest, setBloodTest] = useState(null);
     const [boneTest, setBoneTest] = useState(null);
     const [ultraSound, setUltraSound] = useState(null);
     const [testTotal, setTestTotal] = useState(0);
     const [error, setError] = useState('');
     const [allTests, setAllTest] = useState(null);
+    const [loading, setLoading] = useState(false);
 
+    const navigate = useNavigate();
 
-
-
-
-    const printID = () =>{
-        const characters = '1234567890ABCDEFGHIJLMNOP';
-        const length = characters.length;
-
-        return characters.charAt(Math.random(Math.floor) * length);
-    }
-
+    
     useEffect(() =>{
         if(data.bloodTest){
             setBloodTest(BloodTest.find(test => test.id == data.bloodTest))
@@ -58,6 +56,8 @@ function Reciept({data}) {
 
     const handleComplete = async(event) =>{
 
+        setLoading(true);
+
         const name = data.name;
         const email = data.email;
         const number = data.number;
@@ -80,9 +80,12 @@ function Reciept({data}) {
         if(!response.ok){
             setError(json.error)
             alert(error)
+            setLoading(false)
         }
         if(response.ok){
             console.log("Invoice has been generated", json)
+            setLoading(false)
+            navigate('/completed')
         }
     }
 
@@ -92,7 +95,7 @@ function Reciept({data}) {
                             <div className='container justify-content-center' id="receipt">
                             <div className='pt-4'>
                                 <div>
-                                    <span style={{fontSize: 20, fontWeight: '600', marginBottom: 20}}>Print ID: MD{printID()}</span>
+                                    <span style={{fontSize: 20, fontWeight: '600', marginBottom: 20}}>Print ID: #mdc6574346754</span>
                                 </div>
                                 <table className="table table-striped mt-4">
                                 <thead>
@@ -139,9 +142,16 @@ function Reciept({data}) {
                             </div>
                             <h6 style={{paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22}}> Click on either the <span>Complete Booking</span> Button if you are happy with your receipt</h6>
                             <div className="d-flex justify-content-center pb-4">
-                                <Button variant="primary" size="lg" onClick={handleComplete}>
-                                    Complete Booking
-                                </Button>
+
+                               { !loading 
+                                ?
+                                    <Button variant="primary" size="lg" onClick={handleComplete}>
+                                        Complete Booking
+                                    </Button>
+                                :
+                                <Spinner animation="border" variant="primary" />
+                                }
+
                             </div>
                         </div>
                         :

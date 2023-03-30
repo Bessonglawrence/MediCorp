@@ -1,17 +1,15 @@
 
 import React,{useState} from 'react';
 import {
+  Completed,
   DashBoard,
   Home,
-  LayOut
+  LayOut,
+  Nopage
 } from './Pages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
-import BarPage from './Pages/DashBoardPages/BarPage';
-import SidebarComponent from './components/Sidebar';
-import Topbar from './components/Topbar';
-//import DashBoardRoutes from './routes/DashBoardRoute';
 
 const App = () => {
 
@@ -21,6 +19,10 @@ const App = () => {
         <Route element={<LayOut />} >
             <Route path="/" element={<Home /> } />
             <Route path='/dashboard' element={<DashBoard />} />
+        </Route>
+        <Route>
+          <Route path='/completed' element={<Completed />} />
+          <Route path='*' element={<Nopage />} />
         </Route>
       </Routes>
     </BrowserRouter>
