@@ -1294,43 +1294,6 @@ const Referees = [
     {id: 9, name:'Bastian'}
 ]
 
-const BloodTest = [
-    {
-        id: 1,
-        name: 'blood culture',
-        price: 2000
-    },
-    {
-        id: 2,
-        name: 'blood glucose',
-        price: 6000
-    },
-    {
-        id: 3,
-        name: 'blood gases',
-        price: 8000
-    },
-    {
-        id: 4,
-        name: 'Coagulation test',
-        price: 1000
-    },
-    {
-        id: 5,
-        name: 'Electrolyte test',
-        price: 4000
-    },
-    {
-        id: 6,
-        name: 'C-reactive test',
-        price: 1800
-    },
-    {
-        id: 7,
-        name: 'Erythrocyte Sedimentation rate',
-        price: 2000
-    },
-]
 
 const BoneTest = [
     {
@@ -1374,58 +1337,267 @@ const UltraSound = [
     {
         id:1,
         name: 'Obstetrics',
-        price: 4000
+        price: 7000
     },
     {
         id:2,
         name: 'Pelvis',
-        price: 3400
+        price: 8000
     },
     {
         id:3,
         name: 'Transvaginal',
-        price: 2500
+        price: 12000
     },
     {
         id:4,
         name: 'Upper Abdominal',
-        price: 2700
+        price: 8000
     },
     {
         id:5,
         name: 'Abdominal and Pelvis',
-        price: 3200
+        price: 15000
     },
     {
         id:6,
         name: 'Testicular',
-        price: 5100
+        price: 12000
     },
     {
         id:7,
         name: 'Prostate',
-        price: 4300
+        price: 15000
     },    
     {
         id:8,
         name: 'Thyroid / Neck',
-        price: 3800
+        price: 12000
     },
     {
       id:9,
       name: 'Breast',
-      price: 2800
+      price: 12000
     },
     {
       id:10,
       name: 'Eye',
-      price: 4800
+      price: 12000
     },
     {
       id:11,
       name: 'Soft tissues / Joint',
-      price: 3800
+      price: 10000
     },
+    {
+      id:12,
+      name: 'Abdominal',
+      price: 8000
+    }
+]
+
+const DopplerUltraSound = [
+  {
+    id: 1,
+    name: 'Testicular',
+    price: 35000
+  },
+  {
+      id: 2,
+      name: 'Arterial / Venous of Lower Limbs',
+      price: 35000
+  },
+  {
+      id: 3,
+      name: 'Arterial / Venous of upper Limbs',
+      price: 35000
+  },    
+  {
+      id: 4,
+      name: 'Renal Arteries',
+      price: 35000
+  },
+  {
+      id: 5,
+      name: 'Supra aortic trucks',
+      price: 35000
+  },
+  {
+      id: 6,
+      name: 'Aorta',
+      price: 35000
+  },
+  {
+      id: 7,
+      name: 'Transcranial',
+      price: 35000
+  }
+]
+
+const CTScan = [
+  {
+    id:1,
+    name: 'Brain without Injection',
+    price: 60000
+  },
+  {
+      id:2,
+      name: 'Brain with Injection',
+      price: 80000
+  },
+  {
+      id:3,
+      name: 'Abdomen without Injection',
+      price: 60000
+  },
+  {
+      id:4,
+      name: 'Abdomen without Injection',
+      price: 80000
+  },
+  {
+      id:5,
+      name: 'Pelvis Scan',
+      price: 30000
+  },
+  {
+      id:6,
+      name: 'Thoracic, Abdomen & Pelvis',
+      price: 120000
+  },
+  {
+      id:7,
+      name: 'Cervical Spine',
+      price: 60000
+  },    
+  {
+      id:8,
+      name: 'Lumbar Spine',
+      price: 60000
+  },
+  {
+    id:9,
+    name: 'Thoracic Spine',
+    price: 60000
+  },
+  {
+    id:10,
+    name: 'Thoracolumbar Spine',
+    price: 80000
+  },
+  {
+    id:11,
+    name: 'Joint (Knee, Ankle, Elbow)',
+    price: 60000
+  },
+  {
+    id:12,
+    name: 'Andio-city Scan',
+    price: 100000
+  },
+]
+
+const XRay = [
+  {
+      id:1,
+      name: 'Chest / Rib one view (PA)',
+      price: 6500
+  },
+  {
+      id:2,
+      name: 'Chest / Rib two views (PA and Lateral)',
+      price: 10000
+  },
+  {
+      id:3,
+      name: 'Arm / Forearm',
+      price: 10000
+  },
+  {
+      id:4,
+      name: 'Skull',
+      price: 10000
+  },
+  {
+      id:5,
+      name: 'Cervical Spine',
+      price: 15000
+  },
+  {
+      id:6,
+      name: 'Lumbar Spine',
+      price: 12000
+  },
+  {
+      id:7,
+      name: 'Pelvis',
+      price: 6500
+  },    
+  {
+      id:8,
+      name: 'Hip',
+      price: 10000
+  },
+  {
+    id:9,
+    name: 'Thoracic Spine',
+    price: 15000
+  },
+  {
+    id:10,
+    name: 'Thoracic and Lumbar Spine',
+    price: 25000
+  },
+  {
+    id:11,
+    name: 'Femur',
+    price: 10000
+  },
+  {
+    id:12,
+    name: 'Humerus',
+    price: 10000
+  },
+  {
+    id:13,
+    name: 'Plain Abdominal',
+    price: 65000
+  },
+  {
+    id:14,
+    name: 'Knee',
+    price: 10000
+  },
+  {
+    id:15,
+    name: 'Shoulder',
+    price: 10000
+  },
+  {
+    id:16,
+    name: 'Sinus',
+    price: 10000
+  },
+  {
+    id:17,
+    name: 'Hand / Wrist',
+    price: 10000
+  },
+  {
+    id:18,
+    name: 'Ankle',
+    price: 10000
+  },
+  {
+    id:19,
+    name: 'Foot',
+    price: 10000
+  },
+  {
+    id:20,
+    name: 'Telemetry',
+    price: 15000
+  },
 ]
 
 const Receipts = [
@@ -1501,8 +1673,10 @@ const Receipts = [
 
 export {
     Referees,
-    BloodTest,
     BoneTest,
     UltraSound,
-    Receipts
+    Receipts,
+    XRay,
+    DopplerUltraSound,
+    CTScan
 }

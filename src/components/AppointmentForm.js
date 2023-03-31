@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Select from 'react-select';
 import "../App.css";
-import { Referees, BloodTest, BoneTest, UltraSound } from '../Data/Data';
+import { Referees, BoneTest, UltraSound, XRay, DopplerUltraSound, CTScan} from '../Data/Data';
 
 function AppointmentForm({ onFormSubmit }) {
 
@@ -35,7 +35,6 @@ function AppointmentForm({ onFormSubmit }) {
 
 
     const handleSubmit = (event) => {
-        console.log(inputs);
         const form = event.currentTarget;
 
         if (form.checkValidity() === false) {
@@ -170,37 +169,52 @@ function AppointmentForm({ onFormSubmit }) {
                     </Form.Group>
                 </Row>
 
-                <Row className='mb-3'>
+                <h5 className="d-flex justify-content-center mt-3 mb-3">Select Test(s)</h5>
 
-                    <Form.Group as={Col} md="3" controlId="validationCustom02">
+                <Row className='mb-4'>
+
+                    <Form.Group as={Col} md="6" controlId="validationCustom02">
                         <Form.Label>ULTRASOUND</Form.Label>
-                        <Select options={UltraSound.map((test) => ({ value: test.id, label: test.name }))} isMulti onChange={(v) => selectChange('ultraSounds', v)} />
+                        <Select 
+                            options={UltraSound.map((test) => ({ value: test.id, label: test.name }))} 
+                            isMulti 
+                            onChange={(v) => selectChange('ultraSounds', v)} 
+                        />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="3" controlId="validationCustom02">
+                    <Form.Group as={Col} md="6" controlId="validationCustom02">
                         <Form.Label>X-RAY</Form.Label>
-                        <Select options={BoneTest.map((test) => ({ value: test.id, label: test.name }))} isMulti onChange={(v) => selectChange('boneTests', v)} />
+                        <Select 
+                            options={XRay.map((test) => ({ value: test.id, label: test.name }))} 
+                            isMulti 
+                            onChange={(v) => selectChange('xRayTests', v)} 
+                        />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="3" controlId="validationCustom02">
+                </Row>
+
+                <Row className='mb-4'>
+                <Form.Group as={Col} md="6" controlId="validationCustom02">
                         <Form.Label>DOPPLER ULTRA SOUND</Form.Label>
-                        <Select options={BloodTest.map((test) => ({ value: test.id, label: test.name }))} isMulti onChange={(v) => selectChange('bloodTests', v)} />
+                        <Select 
+                            options={DopplerUltraSound.map((test) => ({ value: test.id, label: test.name }))} 
+                            isMulti 
+                            onChange={(v) => selectChange('dopplerUltraSounds', v)} 
+                        />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
-
-                    {/* <Form.Group as={Col} md="3" controlId="validationCustom02">
-                    <Form.Label>SPECIAL PROCEDURES</Form.Label>
-                    <Form.Select aria-label="Default select example" name='generalTest' onChange={handleChange}>
-                        <option>SPECIAL PROCEDURES</option>
-                        {
-                            UltraSound.map((test) => <option value={test.id}  key={test.id}>{test.name}</option>)
-                        }
-                    </Form.Select>
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group> */}
+                    <Form.Group as={Col} md="6" controlId="validationCustom02">
+                        <Form.Label>CT SCAN</Form.Label>
+                        <Select 
+                            options={CTScan.map((test) => ({ value: test.id, label: test.name }))} 
+                            isMulti 
+                            onChange={(v) => selectChange('ctScanTests', v)} 
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    </Form.Group>
                 </Row>
 
                 <Form.Group className="mb-3">
