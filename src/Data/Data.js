@@ -1600,83 +1600,50 @@ const XRay = [
   },
 ]
 
-const Receipts = [
-    {
-      id: 1,
-      client: " John Doe",
-      testTotal: 8500 ,
-      tests:[
-        {
-          id: 1,
-          test: 'Liver Function',
-          price: 4000,
-        },
-        {
-          id: 2,
-          test: 'Bone marrow',
-          price: 2000
-        },
-        {
-          id: 3,
-          test: 'Pregnancy test',
-          price: 2500
-        }
-      ]
-    },
-    {
-      id: 2,
-      client: "Mark Lance",
-      testTotal: 8500 ,
-      tests:[
-        {
-          id: 4,
-          test: 'Liver Function',
-          price: 4000,
-        },
-        {
-          id: 5,
-          test: 'Bone marrow',
-          price: 2000
-        },
-        {
-          id: 6,
-          test: 'Pregnancy test',
-          price: 2500
-        }
-      ]
-    },
-
-    {
-      id: 3,
-      client: " Janice Edwards",
-      testTotal: 8500,
-      tests:[
-        {
-          id: 7,
-          test: 'Liver Function',
-          price: 4000,
-        },
-        {
-          id: 8,
-          test: 'Bone marrow',
-          price: 2000
-        },
-        {
-          id: 9,
-          test: 'Pregnancy test',
-          price: 2500
-        }
-      ]
-    },
-    
+const SpecialProcedures = [
+  {
+    id:1,
+    name: 'Hysterosonography (HSN)',
+    price: 30000
+  },
+  {
+      id:2,
+      name: 'Hysterosalpingography (HSG)',
+      price: 35000
+  },
+  {
+      id:3,
+      name: 'Ultrasound guided biopsy',
+      price: 15000
+  },
+  {
+      id:4,
+      name: 'Retrograde / Antegrade urethrocystography',
+      price: 35000
+  },
+  {
+      id:5,
+      name: 'Barium swallow / Enema',
+      price: 35000
+  },
 ]
+const Cardiology = [
+  {
+    id: 1,
+    name: 'ECG',
+    price: 15000
+  }
+]
+
+
 
 export {
     Referees,
     BoneTest,
     UltraSound,
-    Receipts,
     XRay,
     DopplerUltraSound,
-    CTScan
+    CTScan,
+    SpecialProcedures,
+    Cardiology
 }

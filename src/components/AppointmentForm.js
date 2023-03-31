@@ -7,7 +7,16 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Select from 'react-select';
 import "../App.css";
-import { Referees, BoneTest, UltraSound, XRay, DopplerUltraSound, CTScan} from '../Data/Data';
+import { 
+    Referees, 
+    BoneTest, 
+    UltraSound, 
+    XRay, 
+    DopplerUltraSound, 
+    CTScan, 
+    SpecialProcedures,
+    Cardiology
+} from '../Data/Data';
 
 function AppointmentForm({ onFormSubmit }) {
 
@@ -173,7 +182,7 @@ function AppointmentForm({ onFormSubmit }) {
 
                 <Row className='mb-4'>
 
-                    <Form.Group as={Col} md="6" controlId="validationCustom02">
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>ULTRASOUND</Form.Label>
                         <Select 
                             options={UltraSound.map((test) => ({ value: test.id, label: test.name }))} 
@@ -183,7 +192,7 @@ function AppointmentForm({ onFormSubmit }) {
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="6" controlId="validationCustom02">
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>X-RAY</Form.Label>
                         <Select 
                             options={XRay.map((test) => ({ value: test.id, label: test.name }))} 
@@ -193,10 +202,20 @@ function AppointmentForm({ onFormSubmit }) {
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
+                        <Form.Label>CARDIOLOGY</Form.Label>
+                        <Select 
+                            options={Cardiology.map((test) => ({ value: test.id, label: test.name }))} 
+                            isMulti 
+                            onChange={(v) => selectChange('cardiologyTests', v)} 
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    </Form.Group>
+
                 </Row>
 
                 <Row className='mb-4'>
-                <Form.Group as={Col} md="6" controlId="validationCustom02">
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>DOPPLER ULTRA SOUND</Form.Label>
                         <Select 
                             options={DopplerUltraSound.map((test) => ({ value: test.id, label: test.name }))} 
@@ -206,12 +225,22 @@ function AppointmentForm({ onFormSubmit }) {
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="6" controlId="validationCustom02">
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>CT SCAN</Form.Label>
                         <Select 
                             options={CTScan.map((test) => ({ value: test.id, label: test.name }))} 
                             isMulti 
                             onChange={(v) => selectChange('ctScanTests', v)} 
+                        />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group as={Col} md="4" controlId="validationCustom02">
+                        <Form.Label>SPECIAL PROCEDURE</Form.Label>
+                        <Select 
+                            options={SpecialProcedures.map((test) => ({ value: test.id, label: test.name }))} 
+                            isMulti 
+                            onChange={(v) => selectChange('specialProcedures', v)} 
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>

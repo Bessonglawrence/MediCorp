@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom'
 import '../App.css'
-import { Referees, BoneTest, UltraSound, XRay, CTScan, DopplerUltraSound } from '../Data/Data';
+import { Referees, BoneTest, UltraSound, XRay, CTScan, DopplerUltraSound, SpecialProcedures, Cardiology } from '../Data/Data';
 
 
 
@@ -13,9 +13,10 @@ function Reciept({ data }) {
     const [xRayTests, setXRayTests] = useState([]);
     const [dopplerUltraSounds, setDopplerUltraSounds] = useState([]);
     const [ultraSounds, setUltraSounds] = useState([]);
+    const [specialProcedures, setSpecialProcedures] = useState([]);
+    const [cardiologyTests, setCardiologyTests] = useState([]);
     const [testTotal, setTestTotal] = useState(0);
     const [error, setError] = useState('');
-    const [allTests, setAllTest] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -23,30 +24,39 @@ function Reciept({ data }) {
 
     useEffect(() => {
         if (data.xRayTests) {
-
             setXRayTests(data.xRayTests.map(inputTest => {
                 return XRay.find(test => test.id === inputTest.value);
             }))
-
         }
-        if (data.ctScanTests) {
 
+        if (data.ctScanTests) {
             setCTScanTests(data.ctScanTests.map(inputTest => {
                 return CTScan.find(test => test.id === inputTest.value)
             }))
-
         }
+
         if (data.ultraSounds) {
             setUltraSounds(data.ultraSounds.map(inputTest => {
                 return UltraSound.find(test => test.id === inputTest.value)
             }))
-
         }
+
         if (data.dopplerUltraSounds) {
             setDopplerUltraSounds(data.dopplerUltraSounds.map(inputTest => {
                 return DopplerUltraSound.find(test => test.id === inputTest.value)
             }))
+        }
 
+        if (data.specialProcedures) {
+            setSpecialProcedures(data.specialProcedures.map(inputTest => {
+                return SpecialProcedures.find(test => test.id === inputTest.value)
+            }))
+        }
+
+        if (data.cardiologyTests) {
+            setCardiologyTests(data.cardiologyTests.map(inputTest => {
+                return Cardiology.find(test => test.id === inputTest.value)
+            }))
         }
 
 
@@ -58,11 +68,14 @@ function Reciept({ data }) {
         ctScanTests.map(test => computedTotal += test.price);
         ultraSounds.map(test => computedTotal += test.price);
         dopplerUltraSounds.map(test => computedTotal += test.price);
+        specialProcedures.map(test => computedTotal += test.price);
+        cardiologyTests.map(test => computedTotal += test.price);
+
 
 
         setTestTotal(computedTotal);
 
-    }, [ctScanTests, ultraSounds, xRayTests, dopplerUltraSounds])
+    }, [ctScanTests, ultraSounds, xRayTests, dopplerUltraSounds, specialProcedures, cardiologyTests])
 
 
     const handleComplete = async (event) => {
@@ -73,7 +86,7 @@ function Reciept({ data }) {
         const email = data.email;
         const number = data.number;
         const total = testTotal;
-        const tests = {xRayTests, ultraSounds, ctScanTests, dopplerUltraSounds};
+        const tests = {xRayTests, ultraSounds, ctScanTests, dopplerUltraSounds, specialProcedures, cardiologyTests};
 
         event.preventDefault();
         const invoice = { name, email, number, total, tests };
@@ -167,6 +180,18 @@ function Reciept({ data }) {
                                     </tr>
                                 ))}
                                 {dopplerUltraSounds.map((test, key) => (
+                                    <tr key={key}>
+                                        <td>{test.name}</td>
+                                        <td>{test.price}</td>
+                                    </tr>
+                                ))}
+                                 {specialProcedures.map((test, key) => (
+                                    <tr key={key}>
+                                        <td>{test.name}</td>
+                                        <td>{test.price}</td>
+                                    </tr>
+                                ))}
+                                {cardiologyTests.map((test, key) => (
                                     <tr key={key}>
                                         <td>{test.name}</td>
                                         <td>{test.price}</td>
