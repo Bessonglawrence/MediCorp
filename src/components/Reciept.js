@@ -206,7 +206,7 @@ function Reciept({ data }) {
 
 
                     </div>
-                    <h6 style={{ paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22 }}> Click on either the <span>Complete Booking</span> Button if you are happy with your receipt</h6>
+                    <h6 style={{ paddingTop: 15, paddingBottom: 15, color: 'bluevoilet', fontSize: 22 }} className="d-flex justify-content-center" > Click on <span>Complete Booking</span> Button if you are happy with your receipt</h6>
                     <div className="d-flex justify-content-center pb-4">
 
                         {!loading
