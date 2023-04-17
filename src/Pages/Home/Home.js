@@ -8,16 +8,20 @@ import LayOut from '../LayOut/LayOut';
 const Home = () => {
 
   const [data, setData] = useState({});
-
+  const [formState, setFormSate] = useState('filling'); // filling | submitted | regenerating
   const onFormSubmit = (formData) =>{
     setData(formData)
+  }
+
+  const updateFormState = (newState) => {
+    setFormSate(newState);
   }
 
   return (
     <div id='background_image'>
         {/* <LayOut /> */}
-        <AppointmentForm onFormSubmit={onFormSubmit}/>
-        <Reciept data={data}/>
+        <AppointmentForm formState={formState} updateFormState={updateFormState} onFormSubmit={onFormSubmit}/>
+        <Reciept formState={formState} updateFormState={updateFormState} data={data}/>
         <Footer />
     </div>
     

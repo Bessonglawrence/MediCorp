@@ -7,7 +7,7 @@ import { Referees, BoneTest, UltraSound, XRay, CTScan, DopplerUltraSound, Specia
 
 
 
-function Reciept({ data }) {
+function Reciept({ data, updateFormState }) {
 
     const [ctScanTests, setCTScanTests] = useState([])
     const [xRayTests, setXRayTests] = useState([]);
@@ -36,6 +36,7 @@ function Reciept({ data }) {
             document.body.getBoundingClientRect().top -
             offset
         });
+        updateFormState('regenerating');
     }
 
 

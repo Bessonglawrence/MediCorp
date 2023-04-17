@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -7,18 +7,18 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Select from 'react-select';
 import "../App.css";
-import { 
-    Referees, 
-    BoneTest, 
-    UltraSound, 
-    XRay, 
-    DopplerUltraSound, 
-    CTScan, 
+import {
+    Referees,
+    BoneTest,
+    UltraSound,
+    XRay,
+    DopplerUltraSound,
+    CTScan,
     SpecialProcedures,
     Cardiology
 } from '../Data/Data';
 
-function AppointmentForm({ onFormSubmit }) {
+function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
 
     const [validated, setValidated] = useState(false);
 
@@ -30,6 +30,12 @@ function AppointmentForm({ onFormSubmit }) {
 
     const [regenerate, setRegenerate] = useState(false)
 
+    useEffect(() => {
+        if (formState == 'regenerating') {
+            setRegenerate(true);
+            updateFormState('filling');
+        }
+    }, [formState])
 
 
     const handleChange = (event) => {
@@ -57,15 +63,17 @@ function AppointmentForm({ onFormSubmit }) {
             setTimeout(() => {
                 setGenerating(true)
                 onFormSubmit({ ...inputs, regenerate });
+                updateFormState('submitted');
+                setRegenerate(false);
             }, 5000);
             setTimeout(() => {
                 let offset = 100;
                 window.scrollTo({
                     behavior: "smooth",
                     bottom:
-                    document.getElementById("receipt_area").getBoundingClientRect().bottom -
-                    document.body.getBoundingClientRect().bottom -
-                    offset
+                        document.getElementById("receipt_area").getBoundingClientRect().bottom -
+                        document.body.getBoundingClientRect().bottom -
+                        offset
                 });
             }, 6000);
             setValidated(true)
@@ -125,7 +133,7 @@ function AppointmentForm({ onFormSubmit }) {
                     <Form.Label>Refered by</Form.Label>
                     <Form.Select aria-label="Default select example">
                         {
-                            Referees.map((referee) => <option key={referee.id} style={{height: 100}} >{referee.name}</option>)
+                            Referees.map((referee) => <option key={referee.id} style={{ height: 100 }} >{referee.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -193,30 +201,30 @@ function AppointmentForm({ onFormSubmit }) {
 
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>ULTRASOUND</Form.Label>
-                        <Select 
-                            options={UltraSound.map((test) => ({ value: test.id, label: test.name }))} 
-                            isMulti 
-                            onChange={(v) => selectChange('ultraSounds', v)} 
+                        <Select
+                            options={UltraSound.map((test) => ({ value: test.id, label: test.name }))}
+                            isMulti
+                            onChange={(v) => selectChange('ultraSounds', v)}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>X-RAY</Form.Label>
-                        <Select 
-                            options={XRay.map((test) => ({ value: test.id, label: test.name }))} 
-                            isMulti 
-                            onChange={(v) => selectChange('xRayTests', v)} 
+                        <Select
+                            options={XRay.map((test) => ({ value: test.id, label: test.name }))}
+                            isMulti
+                            onChange={(v) => selectChange('xRayTests', v)}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>CARDIOLOGY</Form.Label>
-                        <Select 
-                            options={Cardiology.map((test) => ({ value: test.id, label: test.name }))} 
-                            isMulti 
-                            onChange={(v) => selectChange('cardiologyTests', v)} 
+                        <Select
+                            options={Cardiology.map((test) => ({ value: test.id, label: test.name }))}
+                            isMulti
+                            onChange={(v) => selectChange('cardiologyTests', v)}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
@@ -226,30 +234,30 @@ function AppointmentForm({ onFormSubmit }) {
                 <Row className='mb-4'>
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>DOPPLER ULTRA SOUND</Form.Label>
-                        <Select 
-                            options={DopplerUltraSound.map((test) => ({ value: test.id, label: test.name }))} 
-                            isMulti 
-                            onChange={(v) => selectChange('dopplerUltraSounds', v)} 
+                        <Select
+                            options={DopplerUltraSound.map((test) => ({ value: test.id, label: test.name }))}
+                            isMulti
+                            onChange={(v) => selectChange('dopplerUltraSounds', v)}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>CT SCAN</Form.Label>
-                        <Select 
-                            options={CTScan.map((test) => ({ value: test.id, label: test.name }))} 
-                            isMulti 
-                            onChange={(v) => selectChange('ctScanTests', v)} 
+                        <Select
+                            options={CTScan.map((test) => ({ value: test.id, label: test.name }))}
+                            isMulti
+                            onChange={(v) => selectChange('ctScanTests', v)}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>SPECIAL PROCEDURE</Form.Label>
-                        <Select 
-                            options={SpecialProcedures.map((test) => ({ value: test.id, label: test.name }))} 
-                            isMulti 
-                            onChange={(v) => selectChange('specialProcedures', v)} 
+                        <Select
+                            options={SpecialProcedures.map((test) => ({ value: test.id, label: test.name }))}
+                            isMulti
+                            onChange={(v) => selectChange('specialProcedures', v)}
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
@@ -266,13 +274,13 @@ function AppointmentForm({ onFormSubmit }) {
 
                 <div>
                     {
-                        regenerate && 
+                        regenerate &&
                         <Button variant="primary" size="lg" type='submit'>
                             Regenrate Receipt
                         </Button>
                     }
                 </div>
-                    
+
                 {!displayReceipt ?
 
                     <div className="d-flex justify-content-center" id='receipt-button' >
