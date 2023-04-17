@@ -18,8 +18,25 @@ function Reciept({ data }) {
     const [testTotal, setTestTotal] = useState(0);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [regenerate, setRegenerate] = useState(null)
 
     const navigate = useNavigate();
+
+    // const handlBack = () =>{
+    //     let regenerate = data.regenerate;
+
+    // }
+
+    const handleScroll = () =>{
+        let offset = 100;
+        window.scrollTo({
+            behavior: "smooth",
+            top:
+            document.getElementById("mainform").getBoundingClientRect().top -
+            document.body.getBoundingClientRect().top -
+            offset
+        });
+    }
 
 
     useEffect(() => {
@@ -59,6 +76,9 @@ function Reciept({ data }) {
             }))
         }
 
+      setRegenerate(data.regenerate);
+      console.log(typeof(regenerate));
+      console.log(data.regenerate);
 
     }, [data])
 
@@ -70,8 +90,6 @@ function Reciept({ data }) {
         dopplerUltraSounds.map(test => computedTotal += test.price);
         specialProcedures.map(test => computedTotal += test.price);
         cardiologyTests.map(test => computedTotal += test.price);
-
-
 
         setTestTotal(computedTotal);
 
@@ -113,9 +131,9 @@ function Reciept({ data }) {
             navigate('/completed')
         }
     }
-    // console.log({bloodTests, ultraSounds, boneTests})
+    
     return (
-        <div className='br-4'>
+        <div className='br-4' id='receipt_area'>
             {Object.keys(data).length > 0 ?
                 <div className='container ps-5 pe-5' id="receipt">
                     <div className='pt-4'>
@@ -211,9 +229,21 @@ function Reciept({ data }) {
 
                         {!loading
                             ?
-                            <Button variant="primary" size="lg" onClick={handleComplete}>
-                                Complete Booking
-                            </Button>
+                            <div>
+
+                                <Button variant="outline-secondary" size="lg" style={{marginRight: 20}} onClick={handleScroll}>
+                                    Edit Form
+                                </Button>
+                                
+                                <Button variant="primary" size="lg" style={{marginLeft: 20}} onClick={handleComplete}>
+                                    Complete Booking
+                                </Button>
+
+                                <Button variant="outline-danger" size="lg" style={{marginLeft: 40}} onClick={handleComplete}>
+                                    Clear form
+                                </Button>
+                            </div>
+                            
                             :
                             <Spinner animation="border" variant="primary" />
                         }

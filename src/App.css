@@ -92,17 +92,18 @@
   padding: 3rem;
   margin-bottom: 100px;
   margin-top: 2rem;
-  width: 75%;
-  height: 50%;
+  width: 65%;
+  height: 40%;
 }
 
-/* Form Button div */
-/* #buttonDiv{
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-} */
+/* Select Referee drop down*/
+#select{
+  max-height: 146px;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 0px;
+}
+
 
 /* This background image is for the Home image */
 #background_image{
@@ -114,8 +115,8 @@
 }
 /* This is the navbar logo image */
 img{
-  height: 80px;
-  width:  200px;
+  height: 50px;
+  width:  150px;
   margin-left: 5rem;
 }
 
@@ -131,7 +132,6 @@ img{
   bottom: 0;
   background-color: #d0e1ec;
   margin-top: 2rem;
-  height: 400;
 }
 
 /* Social Icon in footer */

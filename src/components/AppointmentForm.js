@@ -28,6 +28,8 @@ function AppointmentForm({ onFormSubmit }) {
 
     const [generating, setGenerating] = useState(false)
 
+    const [regenerate, setRegenerate] = useState(false)
+
 
 
     const handleChange = (event) => {
@@ -54,9 +56,18 @@ function AppointmentForm({ onFormSubmit }) {
             setDisplayReceipt(true);
             setTimeout(() => {
                 setGenerating(true)
-                onFormSubmit({ ...inputs });
+                onFormSubmit({ ...inputs, regenerate });
             }, 5000);
-
+            setTimeout(() => {
+                let offset = 100;
+                window.scrollTo({
+                    behavior: "smooth",
+                    bottom:
+                    document.getElementById("receipt_area").getBoundingClientRect().bottom -
+                    document.body.getBoundingClientRect().bottom -
+                    offset
+                });
+            }, 6000);
             setValidated(true)
             console.log(inputs);
         }
@@ -84,6 +95,7 @@ function AppointmentForm({ onFormSubmit }) {
                         <InputGroup hasValidation>
                             <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                             <Form.Control
+                                required
                                 type="text"
                                 placeholder="Email"
                                 aria-describedby="inputGroupPrepend"
@@ -109,12 +121,11 @@ function AppointmentForm({ onFormSubmit }) {
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} className="mb-2" controlId="validationCustom02">
+                <Form.Group as={Col} className="mb-2" controlId="validationCustom02" id='select_wrapper'>
                     <Form.Label>Refered by</Form.Label>
                     <Form.Select aria-label="Default select example">
-                        <option>Who were you refered by?</option>
                         {
-                            Referees.map((referee) => <option key={referee.id}>{referee.name}</option>)
+                            Referees.map((referee) => <option key={referee.id} style={{height: 100}} >{referee.name}</option>)
                         }
                     </Form.Select>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -125,7 +136,6 @@ function AppointmentForm({ onFormSubmit }) {
                     <Form.Group as={Col} className="mb-2" md="6" controlId="validationCustom02">
                         <Form.Label>Test Date</Form.Label>
                         <Form.Control
-                            required
                             type="date"
                             placeholder="Select Date for test"
                             name="date"
@@ -137,7 +147,6 @@ function AppointmentForm({ onFormSubmit }) {
                     <Form.Group as={Col} className="mb-2" md="6" controlId="validationCustom02">
                         <Form.Label>Test time</Form.Label>
                         <Form.Control
-                            required
                             type="time"
                             placeholder="Select time for test"
                             name="time"
@@ -178,7 +187,7 @@ function AppointmentForm({ onFormSubmit }) {
                     </Form.Group>
                 </Row>
 
-                <h5 className="d-flex justify-content-center mt-3 mb-3">Select Test(s)</h5>
+                <h5 className="d-flex justify-content-center">Select Test(s)</h5>
 
                 <Row className='mb-4'>
 
@@ -246,7 +255,7 @@ function AppointmentForm({ onFormSubmit }) {
                     </Form.Group>
                 </Row>
 
-                <Form.Group className="mb-3">
+                <Form.Group>
                     <Form.Check
                         required
                         label="Agree to terms and conditions"
@@ -255,6 +264,15 @@ function AppointmentForm({ onFormSubmit }) {
                     />
                 </Form.Group>
 
+                <div>
+                    {
+                        regenerate && 
+                        <Button variant="primary" size="lg" type='submit'>
+                            Regenrate Receipt
+                        </Button>
+                    }
+                </div>
+                    
                 {!displayReceipt ?
 
                     <div className="d-flex justify-content-center" id='receipt-button' >

@@ -13,7 +13,7 @@ const LayOut = () => {
     return (
         <>
           <nav className="navbar navbar-expand-lg bg-light sticky-top" id="topnavbar">
-            <a className="navbar-brand" href="#"><img src={logo} height="60" onClick={() => reloadPage()} /></a>
+            <a className="navbar-brand" href="#"><img src={logo} onClick={() => reloadPage()} /></a>
             {/* <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ml-auto">
                 <li className="nav-item active">
