@@ -22,10 +22,9 @@ function Reciept({ data, updateFormState }) {
 
     const navigate = useNavigate();
 
-    // const handlBack = () =>{
-    //     let regenerate = data.regenerate;
-
-    // }
+    const clearForm = () =>{
+        window.location.reload();
+    }
 
     const handleScroll = () =>{
         let offset = 100;
@@ -77,8 +76,7 @@ function Reciept({ data, updateFormState }) {
             }))
         }
 
-      setRegenerate(data.regenerate);
-      console.log(typeof(regenerate));
+
       console.log(data.regenerate);
 
     }, [data])
@@ -240,7 +238,7 @@ function Reciept({ data, updateFormState }) {
                                     Complete Booking
                                 </Button>
 
-                                <Button variant="outline-danger" size="lg" style={{marginLeft: 40}} onClick={handleComplete}>
+                                <Button variant="outline-danger" size="lg" style={{marginLeft: 40}} onClick={clearForm}>
                                     Clear form
                                 </Button>
                             </div>

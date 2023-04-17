@@ -84,7 +84,7 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
 
     return (
         <div className='container' id='mainform'>
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit} >
                 <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlId="validationCustomfirstName">
                         <Form.Label>Full Name</Form.Label>
