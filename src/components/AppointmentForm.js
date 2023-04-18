@@ -26,14 +26,19 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
 
     const [inputs, setInputs] = useState({});
 
-    const [generating, setGenerating] = useState(false)
+    const [generating, setGenerating] = useState(true)
 
     const [regenerate, setRegenerate] = useState(false)
 
+    const [ toggle, setToggle ] = useState(false);
+
+    const [ indicator, setIndicator ] = useState(false);
+
     useEffect(() => {
         if (formState == 'regenerating') {
-            setRegenerate(true);
+            setRegenerate(prevState => !prevState);
             updateFormState('filling');
+            setToggle(true)
         }
     }, [formState])
 
@@ -50,6 +55,17 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
     }
 
 
+    const handleRegenerate = (event) =>{
+        event.preventDefault();
+        setRegenerate(false);
+        setIndicator(true)
+        setTimeout(() => {
+            onFormSubmit({ ...inputs, regenerate });
+            updateFormState('submitted');
+            setIndicator(false);
+        }, 5000);
+    }
+
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -61,21 +77,9 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
             event.preventDefault();
             setDisplayReceipt(true);
             setTimeout(() => {
-                setGenerating(true)
+                setGenerating(false)
                 onFormSubmit({ ...inputs, regenerate });
-                updateFormState('submitted');
-                setRegenerate(false);
             }, 5000);
-            setTimeout(() => {
-                let offset = 100;
-                window.scrollTo({
-                    behavior: "smooth",
-                    bottom:
-                        document.getElementById("receipt_area").getBoundingClientRect().bottom -
-                        document.body.getBoundingClientRect().bottom -
-                        offset
-                });
-            }, 6000);
             setValidated(true)
             console.log(inputs);
         }
@@ -272,14 +276,29 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
                     />
                 </Form.Group>
 
-                <div>
-                    {
-                        regenerate &&
-                        <Button variant="primary" size="lg" type='submit'>
-                            Regenrate Receipt
-                        </Button>
-                    }
-                </div>
+                { 
+                    toggle &&
+                   
+                    <div className="d-flex justify-content-center">
+                        { 
+                            regenerate 
+                            ? 
+                            <Button variant="primary" size="lg" onClick={handleRegenerate}>
+                                Regenerate Receipt
+                            </Button>
+                            :
+                            <div>
+                                { indicator &&
+                                <div>
+                                    <Spinner animation='grow' variant='primary' style={{ marginLeft: 90 }} />
+                                    <h4 className='d-flex justify-content-center'>Regenerating Receipt ...</h4> 
+                                </div>  
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+                
 
                 {!displayReceipt ?
 
@@ -295,7 +314,7 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
                     :
                     <div className="d-flex justify-content-center" id='receipt-button' >
                         {
-                            !generating &&
+                            generating &&
                             <div>
                                 <Spinner animation='grow' variant='primary' style={{ marginLeft: 90 }} />
                                 <h4 className='d-flex justify-content-center'>Generating Receipt ...</h4>

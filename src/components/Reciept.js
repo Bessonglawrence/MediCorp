@@ -35,7 +35,10 @@ function Reciept({ data, updateFormState }) {
             document.body.getBoundingClientRect().top -
             offset
         });
-        updateFormState('regenerating');
+        setTimeout(() => {
+            updateFormState('regenerating');
+        }, 1500);
+       
     }
 
 
