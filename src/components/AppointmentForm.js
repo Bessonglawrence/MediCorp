@@ -9,7 +9,6 @@ import Select from 'react-select';
 import "../App.css";
 import {
     Referees,
-    BoneTest,
     UltraSound,
     XRay,
     DopplerUltraSound,

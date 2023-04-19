@@ -5,7 +5,8 @@ import {
   DashBoard,
   Home,
   LayOut,
-  Nopage
+  Nopage,
+  Login
 } from './Pages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -23,6 +24,7 @@ const App = () => {
         <Route>
           <Route path='/completed' element={<Completed />} />
           <Route path='*' element={<Nopage />} />
+          <Route path='/login' element={<Login />}/>
         </Route>
       </Routes>
     </BrowserRouter>
