@@ -10,14 +10,14 @@ import logo from '../../Images/logo.png';
 
 const Login = () => {
   return (
-      <section className="h-100 gradient-form" style={{backgroundColor: "#eee"}}>
+      <section className="h-100 gradient-form" id='background_image' style={{backgroundColor: "lightblue"}}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-xl-10">
               <div className="card rounded-3 text-black">
                 <div className="row g-0">
                   <div className="col-lg-6">
-                    <div className="card-body p-md-5 mx-md-4">
+                    <div className="card-body p-md-5 mx-md-2">
 
                       <div className="text-center">
                         
@@ -51,7 +51,7 @@ const Login = () => {
 
                         <div className="text-center pt-1 mb-5 pb-1">
                             <Button variant="primary" size="lg" className='gradient-custom-2 pl-6 pr-6' onClick={() => alert('Button click')}>
-                                Login
+                                Log In
                             </Button>
                         </div>
 

@@ -111,6 +111,17 @@
   background-size: cover;
   height: auto;
 }
+
+/*Page lay out*/
+#layout{
+  background-image: url('/src//Images/SL-120219-25650-35.jpg');
+  padding-top: 30px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 59rem;
+}
+
+
 /* This is the navbar logo image */
 img{
   height: 50px;

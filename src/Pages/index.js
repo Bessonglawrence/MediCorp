@@ -4,6 +4,7 @@ import Nopage from "./Nopage/Nopage";
 import LayOut from "./LayOut/LayOut";
 import Completed from "./Completed/Completed";
 import Login from "./Login/Login";
+import PageLayOut from "./PageLayOut/PageLayOut";
 
 export {
     Home,
@@ -11,5 +12,6 @@ export {
     Nopage,
     LayOut,
     Completed,
-    Login
+    Login,
+    PageLayOut
 }

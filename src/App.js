@@ -6,7 +6,8 @@ import {
   Home,
   LayOut,
   Nopage,
-  Login
+  Login,
+  PageLayOut
 } from './Pages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
