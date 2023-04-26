@@ -19,10 +19,11 @@ const Login = () => {
                   <div className="col-lg-6">
                     <div className="card-body p-md-5 mx-md-2">
 
-                      <div className="text-center">
-                        
+
+                    <img src={logo} style={{width: 180, height: 120, marginBottom: 50}} alt="logo" className='ml-10' />
+                      {/* <div className="pl-20">
                         <h4 className="mt-1 mb-5 pb-1" style={{fontStyle: 'italic'}}>LOGIN AS ADMIN</h4>
-                      </div>
+                      </div> */}
 
                       <Form>
 
@@ -49,7 +50,7 @@ const Login = () => {
                         </Form.Group>
 
 
-                        <div className="text-center pt-1 mb-5 pb-1">
+                        <div className="text-center pt-1 mb-5 pb-1 mt-5">
                             <Button variant="primary" size="lg" className='gradient-custom-2 pl-6 pr-6' onClick={() => alert('Button click')}>
                                 Log In
                             </Button>

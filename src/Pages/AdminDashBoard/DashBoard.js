@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import { Box, Button, CssBaseline, IconButton, Typography, ThemeProvider } from "@mui/material";
 import { mockTransactions, mockDataInvoices } from "../../Data/Data";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -18,6 +18,24 @@ const DashBoard = () => {
  
   const [theme, colorMode] = useMode();
   const colors = tokens(theme.palette.mode);
+  const [invoices, setInvoices] = useState([]);
+
+  useEffect(() =>{
+    const fetchInvoices = async() => {
+      const response = await fetch('https://medicorpbackend-u5p7.onrender.com/api/invoice/',{
+        method: 'GET',
+        headers:{
+          'Content-Type': 'application/Json',
+        }
+      })
+      const json = await response.json()
+      if(response.ok){
+        setInvoices(json)
+      }
+      console.log(invoices)
+    }
+    fetchInvoices()
+  }, [])
   
 
   return (
@@ -155,9 +173,9 @@ const DashBoard = () => {
                         Pending Tests
                     </Typography>
             
-                    {mockTransactions.map((transaction, i) => (
+                    {invoices.map((invoice) => (
                       <Box
-                        key={`${transaction.txId}-${i}`}
+                        key={invoice._id}
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
@@ -170,19 +188,19 @@ const DashBoard = () => {
                             variant="h5"
                             fontWeight="600"
                           >
-                            {transaction.txId}
+                            {invoice.email}
                           </Typography>
                           <Typography color={colors.grey[100]}>
-                            {transaction.user}
+                            {invoice.name}
                           </Typography>
                         </Box>
-                        <Box color={colors.grey[100]}>{transaction.date}</Box>
+                        <Box color={colors.grey[100]}>{invoice.createdAt}</Box>
                         <Box
                           backgroundColor={colors.greenAccent[500]}
                           p="5px 10px"
                           borderRadius="4px"
                         >
-                          ${transaction.cost}
+                          ${invoice.total}
                         </Box>
                       </Box>
                     ))}
@@ -256,9 +274,9 @@ const DashBoard = () => {
                     overflow="auto"
                   >
                   
-                    {mockDataInvoices.map((Invoice) => (
+                    {invoices.map((Invoice) => (
                       <Box
-                        key={Invoice.id}
+                        key={Invoice._id}
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
@@ -277,13 +295,13 @@ const DashBoard = () => {
                             {Invoice.email}
                           </Typography>
                         </Box>
-                        <Box color={colors.grey[100]}>{Invoice.date}</Box>
+                        <Box color={colors.grey[100]} style={{alignSelf: 'center'}}>{Invoice.date}</Box>
                         <Box
                           backgroundColor={colors.greenAccent[500]}
                           p="5px 10px"
                           borderRadius="4px"
                         >
-                          ${Invoice.cost}
+                          ${Invoice.total}
                         </Box>
                       </Box>
                     ))}
