@@ -3,11 +3,21 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom'
 import '../App.css'
-import { Referees, BoneTest, UltraSound, XRay, CTScan, DopplerUltraSound, SpecialProcedures, Cardiology } from '../Data/Data';
+import { 
+    UltraSound, 
+    XRay, 
+    CTScan, 
+    DopplerUltraSound, 
+    SpecialProcedures, 
+    Cardiology 
+} from '../Data/Data';
+import { useInvoiceContext } from '../hooks/useInvoiceContext';
 
 
 
 function Reciept({ data, updateFormState }) {
+
+    const { dispatch } = useInvoiceContext();
 
     const [ctScanTests, setCTScanTests] = useState([])
     const [xRayTests, setXRayTests] = useState([]);
@@ -130,7 +140,9 @@ function Reciept({ data, updateFormState }) {
         if (response.ok) {
             console.log("Invoice has been generated", json)
             setLoading(false)
+            dispatch({type: 'CREATE_INVOICE', payload: json})
             navigate('/completed')
+            
         }
     }
     

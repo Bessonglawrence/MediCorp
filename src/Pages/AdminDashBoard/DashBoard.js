@@ -12,13 +12,16 @@ import StatBox from "../../components/StatBox";
 import Footer from "../../components/Footer";
 import Topbar from '../../components/Topbar';
 import { ColorModeContext, useMode, tokens } from '../../theme/theme';
+import { useInvoiceContext } from '../../hooks/useInvoiceContext';
 
 
 const DashBoard = () => {
  
   const [theme, colorMode] = useMode();
   const colors = tokens(theme.palette.mode);
-  const [invoices, setInvoices] = useState([]);
+  //const [invoices, setInvoices] = useState([]);
+  const {invoices, dispatch} = useInvoiceContext()
+
 
   useEffect(() =>{
     const fetchInvoices = async() => {
@@ -30,12 +33,12 @@ const DashBoard = () => {
       })
       const json = await response.json()
       if(response.ok){
-        setInvoices(json)
+        dispatch({type: 'SET_INVOICES', payload: json})
       }
       console.log(invoices)
     }
     fetchInvoices()
-  }, [])
+  }, [dispatch])
   
 
   return (
