@@ -13,6 +13,8 @@ import Footer from "../../components/Footer";
 import Topbar from '../../components/Topbar';
 import { ColorModeContext, useMode, tokens } from '../../theme/theme';
 import { useInvoiceContext } from '../../hooks/useInvoiceContext';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
 
 
 const DashBoard = () => {
@@ -182,7 +184,7 @@ const DashBoard = () => {
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
-                        borderBottom={`4px solid ${colors.primary[500]}`}
+                        borderBottom={`2px solid ${colors.primary[500]}`}
                         p="15px"
                       >
                         <Box>
@@ -191,19 +193,17 @@ const DashBoard = () => {
                             variant="h5"
                             fontWeight="600"
                           >
-                            {invoice.email}
-                          </Typography>
-                          <Typography color={colors.grey[100]}>
                             {invoice.name}
                           </Typography>
+                          
                         </Box>
-                        <Box color={colors.grey[100]}>{invoice.createdAt}</Box>
+                        {/* <Box color={colors.grey[100]}>{invoice.createdAt}</Box> */}
                         <Box
-                          backgroundColor={colors.greenAccent[500]}
+                          backgroundColor={colors.redAccent[500]}
                           p="5px 10px"
                           borderRadius="4px"
                         >
-                          ${invoice.total}
+                          Pending
                         </Box>
                       </Box>
                     ))}
@@ -254,7 +254,7 @@ const DashBoard = () => {
                           p="5px 10px"
                           borderRadius="4px"
                         >
-                          ${transaction.cost}
+                          Done
                         </Box>
                       </Box>
                     ))}
@@ -297,12 +297,14 @@ const DashBoard = () => {
                           <Typography color={colors.grey[100]}>
                             {Invoice.email}
                           </Typography>
+                          <Typography color={colors.grey[100]}>
+                          {formatDistanceToNow(new Date(Invoice.createdAt), {addSuffix: true})}
+                          </Typography>
                         </Box>
-                        <Box color={colors.grey[100]} style={{alignSelf: 'center'}}>{Invoice.date}</Box>
                         <Box
-                          backgroundColor={colors.greenAccent[500]}
-                          p="5px 10px"
-                          borderRadius="4px"
+                           backgroundColor={colors.greenAccent[400]}
+                           p="5px 10px"
+                           borderRadius="4px"
                         >
                           ${Invoice.total}
                         </Box>
