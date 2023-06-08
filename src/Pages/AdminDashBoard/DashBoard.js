@@ -25,6 +25,25 @@ const DashBoard = () => {
   const {invoices, dispatch} = useInvoiceContext()
 
 
+  // const renderTest = (tests) => {
+  //   let names = []
+  //   for (const key in tests) {
+  //     tests[key].map(test => names.push(test.name))
+  //   }
+  
+  //   return names.map((name, index) => <div key={index}>{name}</div>)
+  // }
+
+  const renderTest = (tests) => {
+    let allTests = []
+    for (const key in tests) {
+      tests[key].map(test => allTests.push(test))
+    }
+  
+    return allTests.map((test, index) => <div key={index}>{test.name} - {test.price}</div>)
+  }
+
+
   useEffect(() =>{
     const fetchInvoices = async() => {
       const response = await fetch('https://medicorpbackend-u5p7.onrender.com/api/invoice/',{
@@ -37,7 +56,7 @@ const DashBoard = () => {
       if(response.ok){
         dispatch({type: 'SET_INVOICES', payload: json})
       }
-      console.log(invoices)
+      //console.log(invoices)
     }
     fetchInvoices()
   }, [dispatch])
@@ -178,35 +197,59 @@ const DashBoard = () => {
                         Pending Tests
                     </Typography>
             
-                    {invoices.map((invoice) => (
-                      <Box
-                        key={invoice._id}
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        borderBottom={`2px solid ${colors.primary[500]}`}
-                        p="15px"
-                      >
-                        <Box>
-                          <Typography
-                            color={colors.greenAccent[500]}
-                            variant="h5"
-                            fontWeight="600"
-                          >
-                            {invoice.name}
-                          </Typography>
-                          
-                        </Box>
-                        {/* <Box color={colors.grey[100]}>{invoice.createdAt}</Box> */}
+                    {invoices.map((invoice) =>{if(invoice.done == false){
+                      return(
                         <Box
-                          backgroundColor={colors.redAccent[500]}
-                          p="5px 10px"
-                          borderRadius="4px"
+                          key={invoice._id}
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          borderBottom={`2px solid ${colors.primary[500]}`}
+                          p="15px"
                         >
-                          Pending
+                          <Box>
+                            <Typography
+                              color={colors.greenAccent[500]}
+                              variant="h5"
+                              fontWeight="600"
+                            >
+                              {invoice.name}
+                            </Typography>
+  
+                            <Box color={colors.grey[100]}>
+                            
+                                <Typography
+                                  color={colors.grey[200]}
+                                  variant="h6"
+                                  fontWeight="500"
+                                >
+                                  {renderTest(invoice.tests)}
+                              </Typography>
+                           
+                            </Box>
+  
+                            <Box color={colors.grey[100]}>
+                              <Typography
+                                  color={colors.grey[200]}
+                                  variant="h6"
+                                  fontWeight="500"
+                                >
+                                  {invoice.createdAt}
+                              </Typography>
+                            </Box>
+  
+                          </Box>
+                          
+                          <Box
+                            backgroundColor={colors.redAccent[500]}
+                            p="5px 10px"
+                            borderRadius="4px"
+                          >
+                            Pending
+                          </Box>
                         </Box>
-                      </Box>
-                    ))}
+                      )
+                    }} )}
                   </Box>
 
                   <Box
@@ -215,50 +258,75 @@ const DashBoard = () => {
                     backgroundColor={colors.primary[400]}
                     overflow="auto"
                     marginTop="10px"
-                  > 
-                    <Typography color={colors.grey[100]} 
-                      variant="h5" 
-                      fontWeight="600" 
-                      fontSize="25px" 
-                      textAlign="center"
-                      borderBottom={`4px solid ${colors.primary[500]}`}
-                      margin="10px"
-                      paddingBottom="10px"
-                      >
-                      Done Test
-                    </Typography>
-                    {mockTransactions.map((transaction, i) => (
-                      <Box
-                        key={`${transaction.txId}-${i}`}
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
+                  >
+                  
+                 
+                      <Typography color={colors.grey[100]} 
+                        variant="h5" 
+                        fontWeight="600" 
+                        fontSize="25px" 
+                        textAlign="center"
                         borderBottom={`4px solid ${colors.primary[500]}`}
-                        p="15px"
-                      >
-                        <Box>
-                          <Typography
-                            color={colors.greenAccent[500]}
-                            variant="h5"
-                            fontWeight="600"
-                          >
-                            {transaction.txId}
-                          </Typography>
-                          <Typography color={colors.grey[100]}>
-                            {transaction.user}
-                          </Typography>
-                        </Box>
-                        <Box color={colors.grey[100]}>{transaction.date}</Box>
-                        <Box
-                          backgroundColor={colors.greenAccent[500]}
-                          p="5px 10px"
-                          borderRadius="4px"
+                        margin="10px"
+                        paddingBottom="10px"
                         >
-                          Done
+                        Pending Tests
+                    </Typography>
+            
+                    {invoices.map((invoice) =>{if(invoice.done == true){
+                      return(
+                        <Box
+                          key={invoice._id}
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          borderBottom={`2px solid ${colors.primary[500]}`}
+                          p="15px"
+                        >
+                          <Box>
+                            <Typography
+                              color={colors.greenAccent[500]}
+                              variant="h5"
+                              fontWeight="600"
+                            >
+                              {invoice.name}
+                            </Typography>
+  
+                            <Box color={colors.grey[100]}>
+                            
+                                <Typography
+                                  color={colors.grey[200]}
+                                  variant="h6"
+                                  fontWeight="500"
+                                >
+                                  {renderTest(invoice.tests)}
+                              </Typography>
+                           
+                            </Box>
+  
+                            <Box color={colors.grey[100]}>
+                              <Typography
+                                  color={colors.grey[200]}
+                                  variant="h6"
+                                  fontWeight="500"
+                                >
+                                  {invoice.createdAt}
+                              </Typography>
+                            </Box>
+  
+                          </Box>
+                          
+                          <Button
+                            style={{backgroundColor: colors.greenAccent[500], color: 'white'}}
+                            variant='contained'
+                          >
+                            Done
+                          </Button>
                         </Box>
-                      </Box>
-                    ))}
+                      )
+                    }} )}
                   </Box>
+
 
                   {/* ROW 3 */}
                 </Box>

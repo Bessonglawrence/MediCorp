@@ -1,14 +1,20 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
-import Select from 'react-select';
 import logo from '../../Images/logo.png';
 
 const Login = () => {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword ] = useState('')
+
+  const handleLogin = async(event) => {
+    event.preventDefault();
+     //alert(email, password)
+    console.log(email, password)
+  }
   return (
       <section className="h-100 gradient-form" id='background_image' style={{backgroundColor: "lightblue"}}>
         <div className="container py-5 h-100">
@@ -33,7 +39,8 @@ const Login = () => {
                               required
                               type="email"
                               placeholder="E.g john@gmail.com"
-                              name="email"
+                              value={email}
+                              onChange={(event) => setEmail(event.target.value) }
                           />
                           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -44,14 +51,15 @@ const Login = () => {
                               required
                               type="password"
                               placeholder="*******"
-                              name="password"
+                              value={password}
+                              onChange={(event) => setPassword(event.target.value)}
                           />
                           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
 
 
                         <div className="text-center pt-1 mb-5 pb-1 mt-5">
-                            <Button variant="primary" size="lg" className='gradient-custom-2 pl-6 pr-6' onClick={() => alert('Button click')}>
+                            <Button variant="primary" size="lg" className='gradient-custom-2 pl-6 pr-6' onClick={handleLogin}>
                                 Log In
                             </Button>
                         </div>
