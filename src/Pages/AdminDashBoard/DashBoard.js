@@ -240,13 +240,12 @@ const DashBoard = () => {
   
                           </Box>
                           
-                          <Box
-                            backgroundColor={colors.redAccent[500]}
-                            p="5px 10px"
-                            borderRadius="4px"
+                          <Button
+                            style={{backgroundColor: colors.redAccent[500], color: 'white'}}
+                            variant='contained'
                           >
                             Pending
-                          </Box>
+                          </Button>
                         </Box>
                       )
                     }} )}
