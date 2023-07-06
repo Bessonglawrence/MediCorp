@@ -14,25 +14,20 @@ import Topbar from '../../components/Topbar';
 import { ColorModeContext, useMode, tokens } from '../../theme/theme';
 import { useInvoiceContext } from '../../hooks/useInvoiceContext';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useLogout } from '../../hooks/useLogout';
 
 
-
-const DashBoard = () => {
+const DashBoard = ({invoice}) => {
  
   const [theme, colorMode] = useMode();
   const colors = tokens(theme.palette.mode);
-  //const [invoices, setInvoices] = useState([]);
   const {invoices, dispatch} = useInvoiceContext()
 
+  const { logout } = useLogout()
 
-  // const renderTest = (tests) => {
-  //   let names = []
-  //   for (const key in tests) {
-  //     tests[key].map(test => names.push(test.name))
-  //   }
-  
-  //   return names.map((name, index) => <div key={index}>{name}</div>)
-  // }
+  const { user } = useAuthContext();
+ 
 
   const renderTest = (tests) => {
     let allTests = []
@@ -60,6 +55,22 @@ const DashBoard = () => {
     }
     fetchInvoices()
   }, [dispatch])
+
+  const handlePending = async() => {
+    const response = await fetch('https://medicorpbackend-u5p7.onrender.com/api/invoice/' + invoice._id, {
+      method: 'PATCH',
+      headers:{
+        'Content-Type': 'application/Json',
+      }
+    })
+    const json = await response.json()
+    if(response.ok){
+      dispatch({type: 'UPDATE_INVOICE', payload: json})
+      console.log(json)
+    }
+  }
+
+
   
 
   return (
@@ -71,22 +82,27 @@ const DashBoard = () => {
               <Box m="20px">
                 {/* HEADER */}
                 <Box display="flex" justifyContent="space-between" alignItems="center">
-                  <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-                  <Box>
-                    <Button
-                      sx={{
-                        backgroundColor: colors.blueAccent[700],
-                        color: colors.grey[100],
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        padding: "10px 20px",
-                      }}
-                    >
-                      <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-                      Download Reports
-                    </Button>
-                  </Box>
+                  <Header title="DASHBOARD" subtitle="Welcome to your dashboard" email={user.email}/>
+
+                  { user.email === "admin@gmail.com" ?
+                    <Box>
+                      <Button
+                        sx={{
+                          backgroundColor: colors.blueAccent[700],
+                          color: colors.grey[100],
+                          fontSize: "14px",
+                          fontWeight: "bold",
+                          padding: "10px 20px",
+                        }}
+                      >
+                        <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+                        Download Reports
+                      </Button>
+                    </Box>
+                    :
+                    null
+                  }
                 </Box>
 
                 {/* GRID & CHARTS */}
@@ -97,7 +113,8 @@ const DashBoard = () => {
                   gap="20px"
                 >
                   {/* ROW 1 */}
-                  <Box
+                 { user.email === 'admin@gmail.com' ?
+                 <Box
                     gridColumn="span 3"
                     backgroundColor={colors.primary[400]}
                     display="flex"
@@ -116,63 +133,81 @@ const DashBoard = () => {
                       }
                     />
                   </Box>
-                  <Box
-                    gridColumn="span 3"
-                    backgroundColor={colors.primary[400]}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <StatBox
-                      title="431,225"
-                      subtitle="Sales Obtained"
-                      progress="0.50"
-                      increase="+21%"
-                      icon={
-                        <PointOfSaleIcon
-                          sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                        />
-                      }
-                    />
-                  </Box>
-                  <Box
-                    gridColumn="span 3"
-                    backgroundColor={colors.primary[400]}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <StatBox
-                      title="32,441"
-                      subtitle="New Clients"
-                      progress="0.30"
-                      increase="+5%"
-                      icon={
-                        <PersonAddIcon
-                          sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                        />
-                      }
-                    />
-                  </Box>
-                  <Box
-                    gridColumn="span 3"
-                    backgroundColor={colors.primary[400]}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <StatBox
-                      title="1,325,134"
-                      subtitle="Traffic Received"
-                      progress="0.80"
-                      increase="+43%"
-                      icon={
-                        <TrafficIcon
-                          sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                        />
-                      }
-                    />
-                  </Box>
+                  :
+                  null
+                  }
+
+                  { user.email === 'admin@gmail.com' ?
+                    <Box
+                      gridColumn="span 3"
+                      backgroundColor={colors.primary[400]}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <StatBox
+                        title="431,225"
+                        subtitle="Sales Obtained"
+                        progress="0.50"
+                        increase="+21%"
+                        icon={
+                          <PointOfSaleIcon
+                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                          />
+                        }
+                      />
+                    </Box>
+                    :
+                    null
+                  }
+
+                  { user.email === 'admin@gmail.com' ?
+                    <Box
+                      gridColumn="span 3"
+                      backgroundColor={colors.primary[400]}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <StatBox
+                        title="32,441"
+                        subtitle="New Clients"
+                        progress="0.30"
+                        increase="+5%"
+                        icon={
+                          <PersonAddIcon
+                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                          />
+                        }
+                      />
+                    </Box>
+                    :
+                    null
+                  }
+
+                  {  user.email === 'admin@gmail.com' ?
+                    <Box
+                      gridColumn="span 3"
+                      backgroundColor={colors.primary[400]}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <StatBox
+                        title="1,325,134"
+                        subtitle="Traffic Received"
+                        progress="0.80"
+                        increase="+43%"
+                        icon={
+                          <TrafficIcon
+                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                          />
+                        }
+                      />
+                    </Box>
+                    :
+                    null
+                  }
 
                   {/* ROW 2 */}
                  
@@ -243,6 +278,7 @@ const DashBoard = () => {
                           <Button
                             style={{backgroundColor: colors.redAccent[500], color: 'white'}}
                             variant='contained'
+                            onClick={handlePending}
                           >
                             Pending
                           </Button>
@@ -269,7 +305,7 @@ const DashBoard = () => {
                         margin="10px"
                         paddingBottom="10px"
                         >
-                        Pending Tests
+                        In Progress
                     </Typography>
             
                     {invoices.map((invoice) =>{if(invoice.done == true){

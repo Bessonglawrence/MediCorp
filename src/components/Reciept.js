@@ -120,8 +120,8 @@ function Reciept({ data, updateFormState }) {
 
         event.preventDefault();
         const invoice = { name, email, number, total, tests };
-        console.log({invoice});
-        console.log('JSONIFY', JSON.stringify(invoice));
+        //console.log({invoice});
+        //console.log('JSONIFY', JSON.stringify(invoice));
         const response = await fetch('https://medicorpbackend-u5p7.onrender.com/api/invoice/', {
             method: "POST",
             body: JSON.stringify(invoice),

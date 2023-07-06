@@ -4,17 +4,25 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import logo from '../../Images/logo.png';
+import { useLogin } from '../../hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
+
   const [email, setEmail] = useState('')
   const [password, setPassword ] = useState('')
+  const { login, isLoading, error } = useLogin()
+
+  const navigate = useNavigate();
 
   const handleLogin = async(event) => {
     event.preventDefault();
-     //alert(email, password)
-    console.log(email, password)
+    await login(email, password)
+    navigate('/dashboard')
   }
+
+
   return (
       <section className="h-100 gradient-form" id='background_image' style={{backgroundColor: "lightblue"}}>
         <div className="container py-5 h-100">
@@ -50,7 +58,7 @@ const Login = () => {
                           <Form.Control
                               required
                               type="password"
-                              placeholder="*******"
+                              placeholder="Password"
                               value={password}
                               onChange={(event) => setPassword(event.target.value)}
                           />
@@ -58,16 +66,23 @@ const Login = () => {
                         </Form.Group>
 
 
-                        <div className="text-center pt-1 mb-5 pb-1 mt-5">
-                            <Button variant="primary" size="lg" className='gradient-custom-2 pl-6 pr-6' onClick={handleLogin}>
-                                Log In
-                            </Button>
-                        </div>
+                      
+                          <div className="text-center pt-1 mb-5 pb-1 mt-5">
+                              {
+                                !isLoading ?
+                                <Button variant="primary" size="lg" className='gradient-custom-2 pl-6 pr-6' onClick={handleLogin}>
+                                  Log In
+                                </Button>
+                                :
+                                <Spinner animation='grow' variant='primary' style={{ marginLeft: 90 }} />
+                              }
+                          </div>
+                      
 
-                        {/* <div className="d-flex align-items-center justify-content-center pb-4">
-                          <p className="mb-0 me-2">Don't have an account?</p>
-                          <button type="button" className="btn btn-outline-danger">Create new</button>
-                        </div> */}
+                        <div className="d-flex align-items-center justify-content-center pb-4">
+                          <p className="mb-0 me-2">Not An Admin ?</p>
+                          <button type="button" className="btn btn-outline-primary" onClick={() => navigate('/')}>Book A Test</button>
+                        </div>
 
                       </Form>
 

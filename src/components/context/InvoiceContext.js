@@ -12,6 +12,10 @@ const InvoiceReducer = (state, action) => {
             return {
                 invoices : [action.payload, ...state.invoices]
             }
+        case 'UPDATE_INVOICE':
+            return{
+                invoices : state.invoices.map((invoice) => invoice._id === action.payload._id ? {...invoice, done: "true"}: invoice)
+            }
         default:
             return state;
     }

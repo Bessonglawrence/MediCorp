@@ -106,7 +106,6 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
                         <InputGroup hasValidation>
                             <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                             <Form.Control
-                                required
                                 type="text"
                                 placeholder="Email"
                                 aria-describedby="inputGroupPrepend"
@@ -268,7 +267,6 @@ function AppointmentForm({ onFormSubmit, updateFormState, formState }) {
 
                 <Form.Group>
                     <Form.Check
-                        required
                         label="Agree to terms and conditions"
                         feedback="You must agree before submitting."
                         feedbackType="invalid"

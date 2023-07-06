@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
+
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
@@ -10,7 +11,7 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
         
-        const response = await fetch('/api/user/login', {
+        const response = await fetch('https://medicorpbackend-u5p7.onrender.com/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
@@ -28,8 +29,8 @@ export const useLogin = () => {
 
             // update the Auth Context
             dispatch({type: 'LOGIN', payload: json})
-
             setIsLoading(false)
+            console.log(json)
         }
     }
 
